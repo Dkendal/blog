@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Dylan Kendal</title>
+    <link>/</link>
+    <description>Recent content on Dylan Kendal</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Thu, 07 May 2020 00:00:00 -0400</lastBuildDate>
+    
+	<atom:link href="/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Create a vim quickfix list from the clipboard</title>
+      <link>/post/vim-quickfix-clipboard/</link>
+      <pubDate>Thu, 07 May 2020 00:00:00 -0400</pubDate>
+      
+      <guid>/post/vim-quickfix-clipboard/</guid>
+      <description>Do you find yourself editing a buffer containing file paths and you want to quickly switch between them?
+The :cex[pr][!} {expr} command executes any valid vim expression ({expr}) and constructs a quickfix list from each string of the output.
+Assuming you&amp;rsquo;ve set clipboard to unnamed or unamedplus, you can supply the clipboard register (@*, or @+ respectively) as a vim expression.
+1 2  &amp;#34;assuming :set clipboard=unnamed:cex @*   or:</description>
+    </item>
+    
+  </channel>
+</rss>
