@@ -1,6 +1,7 @@
 baseURL = ""
 languageCode = "en-us"
 title = "Dylan Kendal"
+publishDir = "docs"
 
 theme = "novela"
 paginate = 10
