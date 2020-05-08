@@ -1,0 +1,73 @@
+-*- mode: Org; org-download-image-dir: "./images"; -*-
+#+options: ':nil *:t -:t ::t <:t H:3 \n:nil ^:t arch:headline
+#+options: ':nil -:nil ^:{} num:nil toc:nil
+#+options: author:t broken-links:nil c:nil creator:nil
+#+options: d:(not "LOGBOOK") date:t e:t email:nil f:t inline:t num:t
+#+options: p:nil pri:nil prop:nil stat:t tags:t tasks:t tex:t
+#+options: timestamp:t title:t toc:t todo:t |:t
+
+#+author: Dylan Kendal
+#+bibliography:
+#+creator: Emacs 26.3 (Org mode fatal: not a git repository (or any of the parent directories): .git + ox-hugo)
+#+date: <2020-05-07 Thu>
+#+description:
+#+email: dylankendal@gmail.com
+#+exclude_tags: noexport
+#+language: en
+#+select_tags: export
+
+#+title: Dylan Kendal
+
+#+hugo_base_dir: ../
+#+hugo_section: ./
+
+#+hugo_date_format: %Y-%m-%dT%T%z
+#+hugo_front_matter_format: toml
+#+hugo_level_offset: 1
+#+hugo_auto_set_lastmod: t
+#+hugo_weight: auto
+#+HUGO_CODE_FENCE: 1 
+
+* Index
+  :PROPERTIES:
+  :EXPORT_HUGO_SECTION*: /
+  :CREATED:  <2020-05-07 Thu 10:15>
+  :END:
+* Posts
+  :PROPERTIES:
+  :EXPORT_HUGO_SECTION*: post
+  :CREATED:  <2020-05-07 Thu 10:54>
+  :END:
+** DONE Create a vim quickfix list from the clipboard                   :vim:
+   :PROPERTIES:
+   :EXPORT_FILE_NAME: vim-quickfix-clipboard
+   :EXPORT_HUGO_CUSTOM_FRONT_MATTER: :hero https://upload.wikimedia.org/wikipedia/commons/9/9f/Vimlogo.svg
+   :CREATED:  <2020-05-07 Thu 14:34>
+   :END:
+
+   Do you find yourself editing a buffer containing file paths and you
+   want to quickly switch between them?
+
+   The =:cex[pr][!} {expr}= command executes any valid vim expression
+   (={expr}=) and constructs a quickfix list from each string of the output.
+   
+   Assuming you've =set clipboard= to =unnamed= or =unamedplus=, you
+   can supply the clipboard register (=@*=, or =@+= respectively) as a
+   vim expression.
+   
+   #+begin_src vim -n 1
+   "assuming :set clipboard=unnamed
+   :cex @* 
+   #+end_src
+   
+   or:
+   
+   #+begin_src vim
+   "assuming :set clipboard=unnamedplus
+   :cex @+ 
+   #+end_src
+   
+   Now you can set the quickfix to the current contents of your
+   clipboard, note that your input will still have to match your [[https://neovim.io/doc/user/options.html#'errorformat'][errorformat]].
+   
+   @@html:<p><script id="asciicast-SHFPgdNJTVOH9j8RkSyQpQ2uz" src="https://asciinema.org/a/SHFPgdNJTVOH9j8RkSyQpQ2uz.js" async></script></p>@@

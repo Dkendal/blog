@@ -1,0 +1,15 @@
+baseURL = ""
+languageCode = "en-us"
+title = "Dylan Kendal"
+
+theme = "novela"
+paginate = 10
+
+[markup]
+[markup.goldmark]
+[markup.goldmark.renderer]
+unsafe = true
+
+[social]
+github = "https://github.com/Dkendal"
+linkedin = "https://www.linkedin.com/in/dylan-kendal-24027545/"

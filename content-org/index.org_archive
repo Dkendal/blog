@@ -1,0 +1,20 @@
+#    -*- mode: org -*-
+
+
+Archived entries from file /home/dylan/code/github.com/Dkendal/blog/content-org/index.org
+
+
+* Posts
+  :PROPERTIES:
+  :EXPORT_HUGO_SECTION*: post
+  :CREATED:  <2020-05-07 Thu 10:54>
+  :ARCHIVE_TIME: 2020-05-07 Thu 14:11
+  :ARCHIVE_FILE: ~/code/github.com/Dkendal/blog/content-org/index.org
+  :ARCHIVE_CATEGORY: index
+  :END:
+** Post 1
+   :PROPERTIES:
+   :EXPORT_FILE_NAME: post-1
+   :CREATED:  <2020-05-07 Thu 10:54>
+   :END:
+   This is a post
