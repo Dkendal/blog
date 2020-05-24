@@ -71,3 +71,58 @@
    clipboard, note that your input will still have to match your [[https://neovim.io/doc/user/options.html#'errorformat'][errorformat]].
    
    @@html:<p><script id="asciicast-SHFPgdNJTVOH9j8RkSyQpQ2uz" src="https://asciinema.org/a/SHFPgdNJTVOH9j8RkSyQpQ2uz.js" async></script></p>@@
+** TODO Writing a sorbet codegeneration tool                    :ruby:sorbet:
+   :PROPERTIES:
+   :CREATED:  <2020-05-09 Sat 11:17>
+   :END:
+** TODO Spotify skipping through all tracks after reboot :linux:
+   :PROPERTIES:
+   :CREATED:  <2020-05-21 Thu 12:55>
+   :END:
+   Make sure that pulse audio is started
+** TODO Build Interactive cli tools with FZF                           :linux:
+   :PROPERTIES:
+   :CREATED:  <2020-05-08 Fri 14:00>
+   :END:
+** TODO Org-pomodoro status in i3bar                                   :linux:i3:emacs:
+   :PROPERTIES:
+   :CREATED:  <2020-05-08 Fri 14:12>
+   :END:
+** TODO Setting the quick fix from another kitty pane                   :vim:
+   :PROPERTIES:
+   :CREATED:  <2020-05-08 Fri 14:21>
+   :END:
+** TODO Filter the quickfix list to only valid entries :vim:
+   :PROPERTIES:
+   :CREATED:  <2020-05-08 Fri 14:33>
+   :END:
+** TODO embedded syntax in vim                                          :vim:
+   :PROPERTIES:
+   :CREATED:  <2020-05-08 Fri 15:48>
+   :END:
+** TODO sorbet fixer using lua :ale:vim:lua:sorbet:
+   :PROPERTIES:
+   :CREATED:  <2020-05-08 Fri 15:52>
+   :END:
+   
+** TODO Execute visual selection in vimscript                           :vim:
+   :PROPERTIES:
+   :CREATED:  <2020-05-08 Fri 15:29>
+   :END:
+   Yank the text (which will put it in register 0)
+   Because a register is valid vim expression we can just execute the contents of the register with
+   
+   #+begin_src vim
+   :@0
+   #+end_src
+   
+   Execute a range
+   set mark 'a, 'b
+   
+   #+begin_src vim
+   :'a,'b y | @0
+   #+end_src
+** TODO Set the quickfix with mix errors                         :vim:elixir:
+   :PROPERTIES:
+   :CREATED:  <2020-05-11 Mon 13:33>
+   :END:
