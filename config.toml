@@ -3,7 +3,7 @@ languageCode = "en-us"
 title = "Dylan Kendal"
 publishDir = "docs"
 
-theme = "novela"
+theme = "dkendal"
 paginate = 10
 
 [markup]

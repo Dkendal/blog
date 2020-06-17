@@ -126,3 +126,51 @@
    :PROPERTIES:
    :CREATED:  <2020-05-11 Mon 13:33>
    :END:
+** TODO Elixir Plug api token auth                                   :elixir:
+   :PROPERTIES:
+   :CREATED:  <2020-05-28 Thu 14:05>
+   :END:
+** TODO lua scripting and lua rocks for vim plugin :vim:lua:
+   :PROPERTIES:
+   :CREATED:  <2020-05-29 Fri 14:54>
+   :END:
+** TODO Importing lua rocks dependencies from vim :vim:lua:
+   :PROPERTIES:
+   :CREATED:  <2020-06-03 Wed 10:23>
+   :END:
+   First check what version of lua your install of vim is packaged with with =:h lua=. At the time of writing the packaged version was 5.1.
+   Next make sure that your shell version of luarocks coresponds with a 5.1 minor version. I'm using asdf to manage versions so I install lua and luarocks with =asdf install lua 5.1.5=.
+   Make sure that =LUA_PATH= and =LUA_CPATH= is set. Fish is my shell, so I have a function in my =config.fish= that sets these variables from luarocks.
+   
+   #+begin_src fish
+    function fish_set_lua_path
+	set -xU LUA_PATH (luarocks path --lr-path)
+	set -xU LUA_CPATH (luarocks path --lr-cpath)
+    end
+   #+end_src
+   
+   Debuggin problems:
+   - read =h: lua-require=
+   - Check package.cpath =:lua print(vim.inspect(package.cpath))= is your library in that path?
+   - rocks MUST be installed with a version of lua that matches vim's version. Vim will check for =**/5.1/*= paths, so if you installed with 5.3 it will be in a different directory.
+     
+   Test that your package is present:
+   
+   #+begin_src fish
+   luarocks install --local lpeg
+   #+end_src
+   
+   #+begin_src vimrc
+   :lua print(vim.inspect(require('lpeg')))
+   #+end_src
+   
+   #+begin_src fish
+   nvim -V1 -Es -c"lua print(vim.inspect(require('lpeg')))" 2>&1
+   #+end_src
+   
+   You should see a print out of the module if it succeeds.
+
+** TODO elixir remote plugin neovim :elixir:
+   :PROPERTIES:
+   :CREATED:  <2020-05-29 Fri 14:54>
+   :END:
