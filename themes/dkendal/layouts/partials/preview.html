@@ -1,14 +1,14 @@
-<article class="post-preview">
+<article class="page-margins">
   <a href="{{ .Permalink }}">
-      <h2 class="post-title">{{ .Title }}</h2>
+    <h2>{{ .Title }}</h2>
   </a>
-  <div class="postmeta">
+  <div>
     {{ partial "postmeta.html" . }}
   </div>
-  <div class="post-entry">
+  <div>
     {{ if .Truncated }}
       <p>{{ .Summary }}</p>
-        <a href="{{ .Permalink }}" class="post-read-more">Read More</a>
+      <a href="{{ .Permalink }}">Read More</a>
     {{ end }}
   </div>
 </article>

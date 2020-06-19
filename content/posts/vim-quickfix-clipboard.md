@@ -2,11 +2,10 @@
 title = "Create a vim quickfix list from the clipboard"
 author = ["Dylan Kendal"]
 date = 2020-05-07T00:00:00-04:00
-lastmod = 2020-05-07T21:53:01-04:00
+lastmod = 2020-06-19T01:49:49-04:00
 tags = ["vim"]
 draft = false
 weight = 2001
-hero = "https://upload.wikimedia.org/wikipedia/commons/9/9f/Vimlogo.svg"
 +++
 
 Do you find yourself editing a buffer containing file paths and you
@@ -26,12 +25,12 @@ vim expression.
 
 or:
 
-```vim
+{{< highlight vim >}}
 "assuming :set clipboard=unnamedplus
 :cex @+
-```
+{{< /highlight >}}
 
 Now you can set the quickfix to the current contents of your
 clipboard, note that your input will still have to match your [errorformat](https://neovim.io/doc/user/options.html#'errorformat').
 
-<p><script id="asciicast-SHFPgdNJTVOH9j8RkSyQpQ2uz" src="https://asciinema.org/a/SHFPgdNJTVOH9j8RkSyQpQ2uz.js" async></script></p>
+<div class="block"><script id="asciicast-SHFPgdNJTVOH9j8RkSyQpQ2uz" src="https://asciinema.org/a/SHFPgdNJTVOH9j8RkSyQpQ2uz.js" async></script></div>

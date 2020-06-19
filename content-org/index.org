@@ -1,10 +1,10 @@
 -*- mode: Org; org-download-image-dir: "./images"; -*-
 #+options: ':nil *:t -:t ::t <:t H:3 \n:nil ^:t arch:headline
-#+options: ':nil -:nil ^:{} num:nil toc:nil
+#+options: -:nil ^:{} num:nil toc:nil
 #+options: author:t broken-links:nil c:nil creator:nil
-#+options: d:(not "LOGBOOK") date:t e:t email:nil f:t inline:t num:t
+#+options: d:(not "LOGBOOK") date:t e:t email:nil f:t inline:t
 #+options: p:nil pri:nil prop:nil stat:t tags:t tasks:t tex:t
-#+options: timestamp:t title:t toc:t todo:t |:t
+#+options: timestamp:t title:t todo:t |:t
 
 #+author: Dylan Kendal
 #+bibliography:
@@ -26,22 +26,16 @@
 #+hugo_level_offset: 1
 #+hugo_auto_set_lastmod: t
 #+hugo_weight: auto
-#+HUGO_CODE_FENCE: 1 
+#+HUGO_CODE_FENCE: nil
 
-* Index
-  :PROPERTIES:
-  :EXPORT_HUGO_SECTION*: /
-  :CREATED:  <2020-05-07 Thu 10:15>
-  :END:
 * Posts
   :PROPERTIES:
-  :EXPORT_HUGO_SECTION*: post
+  :export_hugo_section*: posts
   :CREATED:  <2020-05-07 Thu 10:54>
   :END:
 ** DONE Create a vim quickfix list from the clipboard                   :vim:
    :PROPERTIES:
-   :EXPORT_FILE_NAME: vim-quickfix-clipboard
-   :EXPORT_HUGO_CUSTOM_FRONT_MATTER: :hero https://upload.wikimedia.org/wikipedia/commons/9/9f/Vimlogo.svg
+   :export_file_name: vim-quickfix-clipboard
    :CREATED:  <2020-05-07 Thu 14:34>
    :END:
 
@@ -70,7 +64,7 @@
    Now you can set the quickfix to the current contents of your
    clipboard, note that your input will still have to match your [[https://neovim.io/doc/user/options.html#'errorformat'][errorformat]].
    
-   @@html:<p><script id="asciicast-SHFPgdNJTVOH9j8RkSyQpQ2uz" src="https://asciinema.org/a/SHFPgdNJTVOH9j8RkSyQpQ2uz.js" async></script></p>@@
+   @@html:<div class="block"><script id="asciicast-SHFPgdNJTVOH9j8RkSyQpQ2uz" src="https://asciinema.org/a/SHFPgdNJTVOH9j8RkSyQpQ2uz.js" async></script></div>@@
 ** TODO Writing a sorbet codegeneration tool                    :ruby:sorbet:
    :PROPERTIES:
    :CREATED:  <2020-05-09 Sat 11:17>
@@ -174,3 +168,166 @@
    :PROPERTIES:
    :CREATED:  <2020-05-29 Fri 14:54>
    :END:
+* Styleguide
+  :PROPERTIES:
+  :CREATED:  <2020-06-18 Thu 13:10>
+  :export_file_name: styleguide
+  :END:
+** Alphabet test
+  (1)abcdefghijklmnopqrstuvwxyz(2)abcdefghijklmnopqrstuvwxyz(3)abcdefghijklmnopqrstuvwxyz
+  
+** Paragraphs
+  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+  eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
+  ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
+  aliquip ex ea commodo consequat. Duis aute irure dolor in
+  reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
+  pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
+  culpa qui officia deserunt mollit anim id est laborum.
+  
+  <hr/>
+** Lists
+ - Lorem ipsum dolor sit amet
+   - Lorem ipsum dolor sit amet
+   - Lorem ipsum dolor sit amet
+   - Lorem ipsum dolor sit amet
+ - Lorem ipsum dolor sit amet
+   1) Lorem ipsum dolor sit amet
+   2) Lorem ipsum dolor sit amet
+   3) Lorem ipsum dolor sit amet
+ - Lorem ipsum dolor sit amet
+   - [X] Lorem ipsum dolor sit amet
+   - [X] Lorem ipsum dolor sit amet
+   - [ ] Lorem ipsum dolor sit amet
+ - Lorem ipsum dolor sit amet
+   - Lorem :: ipsum dolor sit amet
+   - Lorem :: ipsum dolor sit amet
+   - Lorem :: ipsum dolor sit amet
+     
+** Block quote
+   Here is some text that isn't part of the quote.
+
+  #+begin_quote
+  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+  eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
+  ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
+  aliquip ex ea commodo consequat. Duis aute irure dolor in
+  reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
+  pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
+  culpa qui officia deserunt mollit anim id est laborum.
+  #+end_quote
+  
+  Here is some text that follows the quote.
+  
+     
+** Source block
+   
+    #+begin_src elixir
+    @short :line
+    #+end_src
+    
+    \\
+    
+    #+begin_src elixir
+    30 char line==================
+    #+end_src
+    
+    \\
+    
+    #+begin_src elixir
+    50 char line==========================================================
+    #+end_src
+    
+    \\
+    
+    #+begin_src elixir
+    79 char line===================================================================
+    #+end_src
+    
+    \\
+    
+    #+begin_src elixir
+    @this_is a + :very ++ "very"++ "very"++ "very"++ "very"++ "very"++ "very" ++ "very" <> @@very + :very ++ "very"++ "very"++ "very"++ "very"++ "very"++ "very" ++ "very" <> @@very * ~r/long/ ~> ~w(line)
+    #+end_src
+    
+    \\
+    
+    #+begin_src elixir
+      def at_cursor_pos?(
+	    {_, [closing: [line: l2, column: c2], line: l1, column: c1], _},
+	    line,
+	    col
+	  )
+	  when line in l1..l2 and col in c1..c2 do
+	true
+      end
+    #+end_src
+     
+** Wide source block
+
+  #+attr_html: :class wide-block
+  #+begin_src elixir
+    defmodule Refactor do
+      use NVim.Plugin
+      require Logger
+
+      defmacro is_ast(term), do: is_list(term) or is_tuple(term)
+
+      def init(init_arg) do
+	{:ok, init_arg}
+      end
+
+      def debug(x) do
+	Logger.debug(inspect(x, pretty: true))
+      end
+
+      def at_cursor_pos?(ast, {lnum, cnum}), do: at_cursor_pos?(ast, lnum, cnum)
+
+      def at_cursor_pos?(
+	    {_, [closing: [line: l2, column: c2], line: l1, column: c1], _},
+	    line,
+	    col
+	  )
+	  when line in l1..l2 and col in c1..c2 do
+	true
+      end
+
+      # ...
+
+      def count_left_just(string, count \\ 0)
+      def count_left_just("", count), do: count
+      def count_left_just(" " <> rest, count), do: count_left_just(rest, count + 1)
+      def count_left_just(_, count), do: count
+
+      @quoting_opts [columns: true]
+
+      def string_to_quoted(line) do
+	Code.string_to_quoted(line, @quoting_opts)
+      end
+    end
+  #+end_src
+  
+  \\
+  
+** Example
+  
+  #+begin_example
+  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+  eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
+  ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
+  aliquip ex ea commodo consequat. Duis aute irure dolor in
+  reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
+  pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
+  culpa qui officia deserunt mollit anim id est laborum.
+  #+end_example
+ 
+\\
+ 
+** H2 Lorem ipsum dolor sit amet
+*** H3 Lorem ipsum dolor sit amet
+**** H4 Lorem ipsum dolor sit amet
+***** H5 Lorem ipsum dolor sit amet
+
+      # Local Variables:
+# eval: (org-hugo-auto-export-mode)
+# End:
