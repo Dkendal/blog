@@ -112,8 +112,15 @@ body {
   }
 }
 
-.chroma {
+p > code {
+  color: var(--red);
+}
+
+code, .chroma {
   font-family: 'Input Mono', monospace;
+}
+
+.chroma {
   font-size: 14px;
 }
 
