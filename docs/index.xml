@@ -12,11 +12,21 @@
     
     
     <item>
-      <title>Create a vim quickfix list from the clipboard</title>
-      <link>/post/vim-quickfix-clipboard/</link>
+      <title>Styleguide</title>
+      <link>/styleguide/</link>
       <pubDate>Thu, 07 May 2020 00:00:00 -0400</pubDate>
       
-      <guid>/post/vim-quickfix-clipboard/</guid>
+      <guid>/styleguide/</guid>
+      <description>Alphabet test (1)abcdefghijklmnopqrstuvwxyz(2)abcdefghijklmnopqrstuvwxyz(3)abcdefghijklmnopqrstuvwxyz
+Paragraphs Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</description>
+    </item>
+    
+    <item>
+      <title>Create a vim quickfix list from the clipboard</title>
+      <link>/posts/vim-quickfix-clipboard/</link>
+      <pubDate>Thu, 07 May 2020 00:00:00 -0400</pubDate>
+      
+      <guid>/posts/vim-quickfix-clipboard/</guid>
       <description>Do you find yourself editing a buffer containing file paths and you want to quickly switch between them?
 The :cex[pr][!} {expr} command executes any valid vim expression ({expr}) and constructs a quickfix list from each string of the output.
 Assuming you&amp;rsquo;ve set clipboard to unnamed or unamedplus, you can supply the clipboard register (@*, or @+ respectively) as a vim expression.

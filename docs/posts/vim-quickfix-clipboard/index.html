@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en-us"><meta charset="utf-8" />
+
+  <title>Create a vim quickfix list from the clipboard - Dylan Kendal</title>
+
+
+
+  <meta name="description" content="A programming blog." />
+
+
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+
+<link rel="stylesheet" href="/css/main.min.f8ed9b958af07c11e2cb7a535416d1e04ff56174f3bc170f4fd2d952a3f141c6.css" />
+
+
+<link rel="stylesheet" href="/css/syntax.min.027dc19b8f081b046ba278349172c8111b31b0b45b3d5c84b95b13181c066a07.css" />
+
+<meta name="generator" content="Hugo 0.72.0" /><body>
+  
+
+
+
+
+
+
+
+
+  <header class="">
+    <nav>
+  
+
+  <ul>
+    
+  </ul>
+</nav>
+
+
+    <h1 class="headline">
+    
+      
+        Create a vim quickfix list from the clipboard
+      
+    
+    </h1>
+
+    
+  </header>
+
+<main>
+  <section>
+    <article class="page-margins">
+      <div>
+        <span>
+  Jun 19, 2020
+  
+</span>
+
+      </div>
+
+      
+        <div>
+          
+            <a href="/tags/vim/">#vim</a>&nbsp;
+          
+        </div>
+      
+
+      <br>
+
+      
+        <p>Do you find yourself editing a buffer containing file paths and you
+want to quickly switch between them?</p>
+<p>The <code>:cex[pr][!} {expr}</code> command executes any valid vim expression
+(<code>{expr}</code>) and constructs a quickfix list from each string of the output.</p>
+<p>Assuming you&rsquo;ve <code>set clipboard</code> to <code>unnamed</code> or <code>unamedplus</code>, you
+can supply the clipboard register (<code>@*</code>, or <code>@+</code> respectively) as a
+vim expression.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-vim" data-lang="vim"><span class="c">&#34;assuming :set clipboard=unnamed</span><span class="err">
+</span><span class="err"></span><span class="p">:</span><span class="nx">cex</span> @*</code></pre></td></tr></table>
+</div>
+</div>
+<p>or:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-vim" data-lang="vim"><span class="c">&#34;assuming :set clipboard=unnamedplus</span><span class="err">
+</span><span class="err"></span><span class="p">:</span><span class="nx">cex</span> @<span class="p">+</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>Now you can set the quickfix to the current contents of your
+clipboard, note that your input will still have to match your <a href="https://neovim.io/doc/user/options.html#'errorformat'">errorformat</a>.</p>
+<div class="block"><script id="asciicast-SHFPgdNJTVOH9j8RkSyQpQ2uz" src="https://asciinema.org/a/SHFPgdNJTVOH9j8RkSyQpQ2uz.js" async></script></div>
+
+      
+
+    </article>
+
+    
+  </section>
+
+    </main><footer>
+
+  <p>
+    Dylan Kendal
+    &copy;
+    2020
+  </p>
+</footer>
+</body>
+</html>
