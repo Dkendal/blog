@@ -22,4 +22,6 @@
 {{ $css := resources.Get "css/syntax.css" | postCSS | minify | fingerprint }}
 <link rel="stylesheet" href="{{ $css.Permalink}}" />
 
+<script async defer data-domain="blog.dkendal.com" src="https://plausible.io/js/plausible.js"></script>
+
 {{ hugo.Generator -}}
