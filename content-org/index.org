@@ -33,7 +33,7 @@
   :export_hugo_section*: posts
   :CREATED:  <2020-05-07 Thu 10:54>
   :END:
-** DONE Create a vim quickfix list from the clipboard                   :vim:
+** DONE Create a Vim quickfix list from the clipboard                   :vim:
    :PROPERTIES:
    :export_file_name: vim-quickfix-clipboard
    :CREATED:  <2020-05-07 Thu 14:34>
@@ -65,6 +65,148 @@
    clipboard, note that your input will still have to match your [[https://neovim.io/doc/user/options.html#'errorformat'][errorformat]].
    
    @@html:<div class="block"><script id="asciicast-SHFPgdNJTVOH9j8RkSyQpQ2uz" src="https://asciinema.org/a/SHFPgdNJTVOH9j8RkSyQpQ2uz.js" async></script></div>@@
+** Capture the output of a Vim command                                  :vim:
+   :PROPERTIES:
+   :CREATED:  <2020-06-24 Wed 22:54>
+   :export_file_name: capture-the-output-of-vim-command
+   :END:
+   Vim ships with an internal pager named "more" for displaying
+   command output that is used when the entire screen would be filled.
+   Despite it's name, /more/, it is *not* the command line utility
+   that you might be familiar with, and because it's a builtin feature vim cannot be configured
+   to use an alternative (like /less/).
+
+   Much like it's namesake, the internal /more/ pager leaves a lot to
+   be desired, like any ability to search the output. Fortunately, you can
+   capture the output of any vim expression and display however you want.
+   
+   Vim provides three means of capturing /messages/: =:redir=,
+   =execute()= and =:set verbosefile=. We will be focusing on
+   =execute()= for our purposes. =:redir= can be useful if you just
+   want to quickly redirect output to a variable, file, register, or
+   some other source but you generally will rely on =execute()= while
+   scripting.
+   
+   General usage is =execute({expr})=, or =execute([{expr}, {expr}])=
+   for multiple commands. Notice below how the entire output is
+   concatenated into a single string.
+   
+   #+begin_src vimrc
+     :execute('echon "foo"')
+     'foo'
+     :execute(['echon "foo"', 'echon "bar"'])
+     'foobar'
+   #+end_src
+   
+   Now that we have the output as a string we can write a
+   function that creates a temporary buffer with the output and opens
+   a window in the bottom of the current tabpage.
+   
+   #+begin_src vimrc
+     function! s:split(expr) abort
+     let lines = split(execute(a:expr, 'silent'), "[\n\r]")
+     let name = printf('capture://%s', a:expr)
+
+     if bufexists(name) == v:true
+     execute 'bwipeout' bufnr(name)
+     end
+
+     execute 'botright' 'new' name
+
+     setlocal buftype=nofile
+     setlocal bufhidden=hide
+     setlocal noswapfile
+     setlocal filetype=vim
+
+     call append(line('$'), lines)
+     endfunction
+   #+end_src
+   
+   Or, if you use fzf-vim and you want to search the output you could use it like the below function.
+   
+   #+begin_src vimrc
+     function! s:fzf(expr) abort
+     let lines = split(execute(a:expr, 'silent'), "[\n\r]")
+
+     return fzf#run({
+     \  'source': lines,
+     \  'options': '--tiebreak begin --ansi --header-lines 1'
+     \})
+     endfunction
+   #+end_src
+   
+   Next we can tie it all together with a /command/ that we easily use
+   from command mode, and function that will let us choose dumping to a
+   buffer or searching with fzf on demand.
+   
+   #+begin_src vimrc
+     function s:capture(expr, bang) abort
+       if a:bang
+	 call s:fzf(a:expr)
+       else
+	 call s:split(a:expr)
+       endif
+     endfunction
+
+     command! -nargs=1 P call s:capture(<q-args>, <bang>0)
+   #+end_src
+
+   
+   Here's an example of it capturing the result of =:command= to
+   populate a buffer with all user defined commands.
+
+   #+DOWNLOADED: screenshot @ 2020-06-25 01:20:12
+   [[file:images/Posts/2020-06-25_01-20-12_screenshot.png]]
+ 
+ 
+   
+   Or using =:P! function= to search for all projectionist.vim functions.
+
+#+DOWNLOADED: screenshot @ 2020-06-25 01:23:19
+[[file:images/Posts/2020-06-25_01-23-19_screenshot.png]]
+ 
+
+Below is the script in its entirety:
+
+#+begin_src vimrc
+  function! s:split(expr) abort
+    let lines = split(execute(a:expr, 'silent'), "[\n\r]")
+    let name = printf('capture://%s', a:expr)
+
+    if bufexists(name) == v:true
+      execute 'bwipeout' bufnr(name)
+    end
+
+    execute 'botright' 'new' name
+
+    setlocal buftype=nofile
+    setlocal bufhidden=hide
+    setlocal noswapfile
+    setlocal filetype=vim
+
+    call append(line('$'), lines)
+  endfunction
+
+  function! s:fzf(expr) abort
+    let lines = split(execute(a:expr, 'silent'), "[\n\r]")
+
+    return fzf#run({
+	  \  'source': lines,
+	  \  'options': '--tiebreak begin --ansi --header-lines 1'
+	  \})
+  endfunction
+
+  function s:capture(expr, bang) abort
+    if a:bang
+      call s:fzf(a:expr)
+    else
+      call s:split(a:expr)
+    endif
+  endfunction
+
+  command! -nargs=1 -bang P call s:capture(<q-args>, <bang>0)
+#+end_src
+   
 ** TODO Writing a sorbet codegeneration tool                    :ruby:sorbet:
    :PROPERTIES:
    :CREATED:  <2020-05-09 Sat 11:17>
