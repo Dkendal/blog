@@ -22,6 +22,15 @@ Paragraphs Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusm
     </item>
     
     <item>
+      <title>Batch export Org-mode pages</title>
+      <link>/posts/batch-export-org-mode-pages/</link>
+      <pubDate>Thu, 07 May 2020 00:00:00 -0400</pubDate>
+      
+      <guid>/posts/batch-export-org-mode-pages/</guid>
+      <description>A common task if - like me - you use Org-mode to create static websites; is to export the document to your destination format. Take this blog for instance. It&amp;rsquo;s written in Org-mode, which is exported to markdown for use by Hugo which will then compile it to HTML. The obvious choice for exporting your content would be to call the command directly within Emacs, but say you wanted to do this as a part of some other build process or as part of an automated continuous deployment process it would be necessary to invoke the export command from the shell.</description>
+    </item>
+    
+    <item>
       <title>Capture the output of a Vim command</title>
       <link>/posts/capture-the-output-of-vim-command/</link>
       <pubDate>Thu, 07 May 2020 00:00:00 -0400</pubDate>

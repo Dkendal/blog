@@ -12,6 +12,33 @@
     
     
     <item>
+      <title>emacs</title>
+      <link>/tags/emacs/</link>
+      <pubDate>Thu, 07 May 2020 00:00:00 -0400</pubDate>
+      
+      <guid>/tags/emacs/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>hugo</title>
+      <link>/tags/hugo/</link>
+      <pubDate>Thu, 07 May 2020 00:00:00 -0400</pubDate>
+      
+      <guid>/tags/hugo/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>orgmode</title>
+      <link>/tags/orgmode/</link>
+      <pubDate>Thu, 07 May 2020 00:00:00 -0400</pubDate>
+      
+      <guid>/tags/orgmode/</guid>
+      <description></description>
+    </item>
+    
+    <item>
       <title>vim</title>
       <link>/tags/vim/</link>
       <pubDate>Thu, 07 May 2020 00:00:00 -0400</pubDate>

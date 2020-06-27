@@ -2,10 +2,10 @@
 title = "Capture the output of a Vim command"
 author = ["Dylan Kendal"]
 date = 2020-05-07T00:00:00-04:00
-lastmod = 2020-06-27T15:10:06-04:00
+lastmod = 2020-06-27T17:43:37-04:00
 tags = ["vim"]
 draft = false
-weight = 2001
+weight = 2002
 +++
 
 Vim ships with an internal pager named "more" for displaying
@@ -61,7 +61,7 @@ endfunction
 {{< /highlight >}}
 
 Which when called will produce the output below (command `:P` is
-defined later). The screenshot below shows capturing the output of
+defined later). The  show capturing the output of
 `:command` to get a listing of all user defined commands.
 
 {{< figure src="/ox-hugo/2020-06-25_01-20-12_screenshot.png" >}}
@@ -81,7 +81,7 @@ endfunction
 
 And as a example usage we could execute `:P! function` to search for all projectionist.vim functions.
 
-{{< figure src="/ox-hugo/2020-06-25_01-23-19_screenshot.png" >}}
+![](/ox-hugo/2020-06-25_01-23-19_screenshot.png)]]
 
 Now we can tie it all together with a _command_ that we easily use
 from command mode, and function that will let us choose dumping to a

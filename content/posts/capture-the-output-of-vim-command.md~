@@ -2,10 +2,10 @@
 title = "Capture the output of a Vim command"
 author = ["Dylan Kendal"]
 date = 2020-05-07T00:00:00-04:00
-lastmod = 2020-06-27T15:09:19-04:00
+lastmod = 2020-06-27T17:28:23-04:00
 tags = ["vim"]
 draft = false
-weight = 2001
+weight = 2002
 +++
 
 Vim ships with an internal pager named "more" for displaying
@@ -61,7 +61,7 @@ endfunction
 {{< /highlight >}}
 
 Which when called will produce the output below (command `:P` is
-defined later). The screenshot below shows capturing the output of
+defined later). The  show capturing the output of
 `:command` to get a listing of all user defined commands.
 
 {{< figure src="/ox-hugo/2020-06-25_01-20-12_screenshot.png" >}}

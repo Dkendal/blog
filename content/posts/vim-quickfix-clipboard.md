@@ -2,10 +2,10 @@
 title = "Create a Vim quickfix list from the clipboard"
 author = ["Dylan Kendal"]
 date = 2020-05-07T00:00:00-04:00
-lastmod = 2020-06-27T15:10:07-04:00
+lastmod = 2020-06-27T17:43:38-04:00
 tags = ["vim"]
 draft = false
-weight = 2002
+weight = 2003
 +++
 
 Do you find yourself editing a buffer containing file paths and you
