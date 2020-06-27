@@ -2,7 +2,7 @@
 title = "Styleguide"
 author = ["Dylan Kendal"]
 date = 2020-05-07T00:00:00-04:00
-lastmod = 2020-06-27T13:34:29-04:00
+lastmod = 2020-06-27T14:30:51-04:00
 draft = false
 weight = 1001
 +++
@@ -173,12 +173,24 @@ culpa qui officia deserunt mollit anim id est laborum.
 
 ## H2 Lorem ipsum dolor sit amet {#h2-lorem-ipsum-dolor-sit-amet}
 
+<br />
+
 
 ### H3 Lorem ipsum dolor sit amet {#h3-lorem-ipsum-dolor-sit-amet}
+
+<br />
 
 
 #### H4 Lorem ipsum dolor sit amet {#h4-lorem-ipsum-dolor-sit-amet}
 
-<!--list-separator-->
+<br />
 
--  H5 Lorem ipsum dolor sit amet
+
+##### H5 Lorem ipsum dolor sit amet {#h5-lorem-ipsum-dolor-sit-amet}
+
+<br />
+
+
+###### H6 Lorem ipsum dolor sit amet {#h6-lorem-ipsum-dolor-sit-amet}
+
+<br />

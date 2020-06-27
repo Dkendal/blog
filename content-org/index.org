@@ -1,5 +1,5 @@
 -*- mode: Org; org-download-image-dir: "./images"; -*-
-#+options: ':nil *:t -:t ::t <:t H:3 \n:nil ^:t arch:headline
+#+options: ':nil *:t -:t ::t <:t H:6 \n:nil ^:t arch:headline
 #+options: -:nil ^:{} num:nil toc:nil
 #+options: author:t broken-links:nil c:nil creator:nil
 #+options: d:(not "LOGBOOK") date:t e:t email:nil f:t inline:t
@@ -464,11 +464,16 @@ Below is the script in its entirety:
   #+end_example
  
 \\
- 
 ** H2 Lorem ipsum dolor sit amet
+\\
 *** H3 Lorem ipsum dolor sit amet
+\\
 **** H4 Lorem ipsum dolor sit amet
+\\
 ***** H5 Lorem ipsum dolor sit amet
+\\
+****** H6 Lorem ipsum dolor sit amet
+\\
 
       # Local Variables:
 # eval: (org-hugo-auto-export-mode)
