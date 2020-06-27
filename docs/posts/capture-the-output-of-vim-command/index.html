@@ -139,24 +139,31 @@ a window in the bottom of the current tabpage.</p>
 </span></code></pre></td>
 <td class="lntd">
 <pre class="chroma"><code class="language-vimrc" data-lang="vimrc"><span class="k">function</span><span class="p">!</span> <span class="nx">s</span>:<span class="nx">split</span><span class="p">(</span><span class="nx">expr</span><span class="p">)</span> <span class="nx">abort</span><span class="err">
-</span><span class="err"></span><span class="k">let</span> <span class="nx">lines</span> <span class="p">=</span> <span class="nx">split</span><span class="p">(</span><span class="nx">execute</span><span class="p">(</span><span class="nx">a</span>:<span class="nx">expr</span><span class="p">,</span> <span class="s1">&#39;silent&#39;</span><span class="p">),</span> <span class="s2">&#34;[\n\r]&#34;</span><span class="p">)</span><span class="err">
-</span><span class="err"></span><span class="k">let</span> <span class="nx">name</span> <span class="p">=</span> <span class="nx">printf</span><span class="p">(</span><span class="s1">&#39;capture://%s&#39;</span><span class="p">,</span> <span class="nx">a</span>:<span class="nx">expr</span><span class="p">)</span><span class="err">
+</span><span class="err"></span>  <span class="k">let</span> <span class="nx">lines</span> <span class="p">=</span> <span class="nx">split</span><span class="p">(</span><span class="nx">execute</span><span class="p">(</span><span class="nx">a</span>:<span class="nx">expr</span><span class="p">,</span> <span class="s1">&#39;silent&#39;</span><span class="p">),</span> <span class="s2">&#34;[\n\r]&#34;</span><span class="p">)</span><span class="err">
+</span><span class="err"></span>  <span class="k">let</span> <span class="nx">name</span> <span class="p">=</span> <span class="nx">printf</span><span class="p">(</span><span class="s1">&#39;capture://%s&#39;</span><span class="p">,</span> <span class="nx">a</span>:<span class="nx">expr</span><span class="p">)</span><span class="err">
 </span><span class="err">
-</span><span class="err"></span><span class="k">if</span> <span class="nx">bufexists</span><span class="p">(</span><span class="nx">name</span><span class="p">)</span> <span class="p">==</span> <span class="nx">v</span>:<span class="nx">true</span><span class="err">
-</span><span class="err"></span><span class="nx">execute</span> <span class="s1">&#39;bwipeout&#39;</span> <span class="nx">bufnr</span><span class="p">(</span><span class="nx">name</span><span class="p">)</span><span class="err">
-</span><span class="err"></span><span class="nx">end</span><span class="err">
+</span><span class="err"></span>  <span class="k">if</span> <span class="nx">bufexists</span><span class="p">(</span><span class="nx">name</span><span class="p">)</span> <span class="p">==</span> <span class="nx">v</span>:<span class="nx">true</span><span class="err">
+</span><span class="err"></span>    <span class="nx">execute</span> <span class="s1">&#39;bwipeout&#39;</span> <span class="nx">bufnr</span><span class="p">(</span><span class="nx">name</span><span class="p">)</span><span class="err">
+</span><span class="err"></span>  <span class="k">endif</span><span class="err">
 </span><span class="err">
-</span><span class="err"></span><span class="nx">execute</span> <span class="s1">&#39;botright&#39;</span> <span class="s1">&#39;new&#39;</span> <span class="nx">name</span><span class="err">
+</span><span class="err"></span>  <span class="nx">execute</span> <span class="s1">&#39;botright&#39;</span> <span class="s1">&#39;new&#39;</span> <span class="nx">name</span><span class="err">
 </span><span class="err">
-</span><span class="err"></span><span class="nx">setlocal</span> <span class="nx">buftype</span><span class="p">=</span><span class="nx">nofile</span><span class="err">
-</span><span class="err"></span><span class="nx">setlocal</span> <span class="nx">bufhidden</span><span class="p">=</span><span class="nx">hide</span><span class="err">
-</span><span class="err"></span><span class="nx">setlocal</span> <span class="nx">noswapfile</span><span class="err">
-</span><span class="err"></span><span class="nx">setlocal</span> <span class="nx">filetype</span><span class="p">=</span><span class="nx">vim</span><span class="err">
+</span><span class="err"></span>  <span class="nx">setlocal</span> <span class="nx">buftype</span><span class="p">=</span><span class="nx">nofile</span><span class="err">
+</span><span class="err"></span>  <span class="nx">setlocal</span> <span class="nx">bufhidden</span><span class="p">=</span><span class="nx">hide</span><span class="err">
+</span><span class="err"></span>  <span class="nx">setlocal</span> <span class="nx">noswapfile</span><span class="err">
+</span><span class="err"></span>  <span class="nx">setlocal</span> <span class="nx">filetype</span><span class="p">=</span><span class="nx">vim</span><span class="err">
 </span><span class="err">
-</span><span class="err"></span><span class="nx">call</span> <span class="nx">append</span><span class="p">(</span><span class="nx">line</span><span class="p">(</span><span class="s1">&#39;$&#39;</span><span class="p">),</span> <span class="nx">lines</span><span class="p">)</span><span class="err">
+</span><span class="err"></span>  <span class="nx">call</span> <span class="nx">append</span><span class="p">(</span><span class="nx">line</span><span class="p">(</span><span class="s1">&#39;$&#39;</span><span class="p">),</span> <span class="nx">lines</span><span class="p">)</span><span class="err">
 </span><span class="err"></span><span class="k">endfunction</span></code></pre></td></tr></table>
 </div>
 </div>
+<p>Which when called will produce the output below (command <code>:P</code> is
+defined later). The screenshot below shows capturing the output of
+<code>:command</code> to get a listing of all user defined commands.</p>
+<figure>
+    <img src="/ox-hugo/2020-06-25_01-20-12_screenshot.png"/> 
+</figure>
+
 <p>Or, if you use fzf-vim and you want to search the output you could use it like the below function.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -171,16 +178,21 @@ a window in the bottom of the current tabpage.</p>
 </span></code></pre></td>
 <td class="lntd">
 <pre class="chroma"><code class="language-vimrc" data-lang="vimrc"><span class="k">function</span><span class="p">!</span> <span class="nx">s</span>:<span class="nx">fzf</span><span class="p">(</span><span class="nx">expr</span><span class="p">)</span> <span class="nx">abort</span><span class="err">
-</span><span class="err"></span><span class="k">let</span> <span class="nx">lines</span> <span class="p">=</span> <span class="nx">split</span><span class="p">(</span><span class="nx">execute</span><span class="p">(</span><span class="nx">a</span>:<span class="nx">expr</span><span class="p">,</span> <span class="s1">&#39;silent&#39;</span><span class="p">),</span> <span class="s2">&#34;[\n\r]&#34;</span><span class="p">)</span><span class="err">
+</span><span class="err"></span>  <span class="k">let</span> <span class="nx">lines</span> <span class="p">=</span> <span class="nx">split</span><span class="p">(</span><span class="nx">execute</span><span class="p">(</span><span class="nx">a</span>:<span class="nx">expr</span><span class="p">,</span> <span class="s1">&#39;silent&#39;</span><span class="p">),</span> <span class="s2">&#34;[\n\r]&#34;</span><span class="p">)</span><span class="err">
 </span><span class="err">
-</span><span class="err"></span><span class="nx">return</span> <span class="nx">fzf</span>#<span class="nx">run</span><span class="p">(</span>{<span class="err">
-</span><span class="err"></span>\  <span class="s1">&#39;source&#39;</span>: <span class="nx">lines</span><span class="p">,</span><span class="err">
-</span><span class="err"></span>\  <span class="s1">&#39;options&#39;</span>: <span class="s1">&#39;--tiebreak begin --ansi --header-lines 1&#39;</span><span class="err">
-</span><span class="err"></span>\}<span class="p">)</span><span class="err">
+</span><span class="err"></span>  <span class="nx">return</span> <span class="nx">fzf</span>#<span class="nx">run</span><span class="p">(</span>{<span class="err">
+</span><span class="err"></span>  \  <span class="s1">&#39;source&#39;</span>: <span class="nx">lines</span><span class="p">,</span><span class="err">
+</span><span class="err"></span>  \  <span class="s1">&#39;options&#39;</span>: <span class="s1">&#39;--tiebreak begin --ansi --header-lines 1&#39;</span><span class="err">
+</span><span class="err"></span>  \}<span class="p">)</span><span class="err">
 </span><span class="err"></span><span class="k">endfunction</span></code></pre></td></tr></table>
 </div>
 </div>
-<p>Next we can tie it all together with a <em>command</em> that we easily use
+<p>And as a example usage we could execute <code>:P! function</code> to search for all projectionist.vim functions.</p>
+<figure>
+    <img src="/ox-hugo/2020-06-25_01-23-19_screenshot.png"/> 
+</figure>
+
+<p>Now we can tie it all together with a <em>command</em> that we easily use
 from command mode, and function that will let us choose dumping to a
 buffer or searching with fzf on demand.</p>
 <div class="highlight"><div class="chroma">
@@ -207,17 +219,6 @@ buffer or searching with fzf on demand.</p>
 </span><span class="err"></span><span class="nx">command</span><span class="p">!</span> <span class="p">-</span><span class="nx">nargs</span><span class="p">=</span><span class="m">1</span> <span class="nx">P</span> <span class="nx">call</span> <span class="nx">s</span>:<span class="nx">capture</span><span class="p">(&lt;</span><span class="nx">q</span><span class="p">-</span><span class="nx">args</span><span class="p">&gt;,</span> <span class="p">&lt;</span><span class="nx">bang</span><span class="p">&gt;</span><span class="m">0</span><span class="p">)</span></code></pre></td></tr></table>
 </div>
 </div>
-<p>Here&rsquo;s an example of it capturing the result of <code>:command</code> to
-populate a buffer with all user defined commands.</p>
-<figure>
-    <img src="/ox-hugo/2020-06-25_01-20-12_screenshot.png"/> 
-</figure>
-
-<p>Or using <code>:P! function</code> to search for all projectionist.vim functions.</p>
-<figure>
-    <img src="/ox-hugo/2020-06-25_01-23-19_screenshot.png"/> 
-</figure>
-
 <p>Below is the script in its entirety:</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">

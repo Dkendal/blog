@@ -175,38 +175,51 @@
    
    #+begin_src vimrc
      function! s:split(expr) abort
-     let lines = split(execute(a:expr, 'silent'), "[\n\r]")
-     let name = printf('capture://%s', a:expr)
-
-     if bufexists(name) == v:true
-     execute 'bwipeout' bufnr(name)
-     end
-
-     execute 'botright' 'new' name
-
-     setlocal buftype=nofile
-     setlocal bufhidden=hide
-     setlocal noswapfile
-     setlocal filetype=vim
-
-     call append(line('$'), lines)
+       let lines = split(execute(a:expr, 'silent'), "[\n\r]")
+       let name = printf('capture://%s', a:expr)
+  
+       if bufexists(name) == v:true
+	 execute 'bwipeout' bufnr(name)
+       endif
+  
+       execute 'botright' 'new' name
+  
+       setlocal buftype=nofile
+       setlocal bufhidden=hide
+       setlocal noswapfile
+       setlocal filetype=vim
+  
+       call append(line('$'), lines)
      endfunction
    #+end_src
+   
+   Which when called will produce the output below (command =:P= is
+   defined later). The screenshot below shows capturing the output of
+   =:command= to get a listing of all user defined commands.
+   
+   #+DOWNLOADED: screenshot @ 2020-06-25 01:20:12
+   [[file:images/Posts/2020-06-25_01-20-12_screenshot.png]]
+ 
    
    Or, if you use fzf-vim and you want to search the output you could use it like the below function.
    
    #+begin_src vimrc
      function! s:fzf(expr) abort
-     let lines = split(execute(a:expr, 'silent'), "[\n\r]")
-
-     return fzf#run({
-     \  'source': lines,
-     \  'options': '--tiebreak begin --ansi --header-lines 1'
-     \})
+       let lines = split(execute(a:expr, 'silent'), "[\n\r]")
+  
+       return fzf#run({
+       \  'source': lines,
+       \  'options': '--tiebreak begin --ansi --header-lines 1'
+       \})
      endfunction
    #+end_src
    
-   Next we can tie it all together with a /command/ that we easily use
+   And as a example usage we could execute =:P! function= to search for all projectionist.vim functions.
+
+   #+DOWNLOADED: screenshot @ 2020-06-25 01:23:19
+   file:images/Posts/2020-06-25_01-23-19_screenshot.png
+   
+   Now we can tie it all together with a /command/ that we easily use
    from command mode, and function that will let us choose dumping to a
    buffer or searching with fzf on demand.
    
@@ -223,21 +236,7 @@
    #+end_src
 
    
-   Here's an example of it capturing the result of =:command= to
-   populate a buffer with all user defined commands.
-
-   #+DOWNLOADED: screenshot @ 2020-06-25 01:20:12
-   [[file:images/Posts/2020-06-25_01-20-12_screenshot.png]]
- 
- 
-   
-   Or using =:P! function= to search for all projectionist.vim functions.
-
-#+DOWNLOADED: screenshot @ 2020-06-25 01:23:19
-[[file:images/Posts/2020-06-25_01-23-19_screenshot.png]]
- 
-
-Below is the script in its entirety:
+   Below is the script in its entirety:
 
 #+begin_src vimrc
   function! s:split(expr) abort
