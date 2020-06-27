@@ -5,6 +5,7 @@
 #+options: d:(not "LOGBOOK") date:t e:t email:nil f:t inline:t
 #+options: p:nil pri:nil prop:nil stat:t tags:t tasks:t tex:t
 #+options: timestamp:t title:t todo:t |:t
+#+startup: logdone
 
 #+author: Dylan Kendal
 #+bibliography:
@@ -137,6 +138,7 @@
    :CREATED:  <2020-05-08 Fri 14:00>
    :END:
 ** DONE Batch export Org-mode pages                      :emacs:orgmode:hugo:
+   CLOSED: [2020-06-27 Sat 18:03]
    :PROPERTIES:
    :CREATED:  <2020-06-27 Sat 16:58>
    :export_file_name: batch-export-org-mode-pages
@@ -200,6 +202,7 @@
    
    
 ** DONE Capture the output of a Vim command                             :vim:
+   CLOSED: [2020-06-24 Wed 22:54]
    :PROPERTIES:
    :CREATED:  <2020-06-24 Wed 22:54>
    :export_file_name: capture-the-output-of-vim-command
@@ -340,6 +343,7 @@
   command! -nargs=1 -bang P call s:capture(<q-args>, <bang>0)
 #+end_src
 ** DONE Create a Vim quickfix list from the clipboard                   :vim:
+   CLOSED: [2020-05-07 Thu 14:34]
    :PROPERTIES:
    :export_file_name: vim-quickfix-clipboard
    :CREATED:  <2020-05-07 Thu 14:34>

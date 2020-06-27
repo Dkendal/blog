@@ -1,5 +1,5 @@
 <span>
-  {{ .Lastmod.Format ( .Site.Params.dateformat | default "Jan 2, 2006") }}
+  {{ .Date.Format ( .Site.Params.dateformat | default "Jan 2, 2006") }}
   {{ if .Params.categories }}
     <br>
     {{ range .Params.categories }}

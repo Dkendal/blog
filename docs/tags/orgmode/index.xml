@@ -6,7 +6,7 @@
     <description>Recent content in orgmode on Dylan Kendal</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Thu, 07 May 2020 00:00:00 -0400</lastBuildDate>
+    <lastBuildDate>Sat, 27 Jun 2020 18:03:00 -0400</lastBuildDate>
     
 	<atom:link href="/tags/orgmode/index.xml" rel="self" type="application/rss+xml" />
     
@@ -14,7 +14,7 @@
     <item>
       <title>Batch export Org-mode pages</title>
       <link>/posts/batch-export-org-mode-pages/</link>
-      <pubDate>Thu, 07 May 2020 00:00:00 -0400</pubDate>
+      <pubDate>Sat, 27 Jun 2020 18:03:00 -0400</pubDate>
       
       <guid>/posts/batch-export-org-mode-pages/</guid>
       <description>A common task if - like me - you use Org-mode to create static websites; is to export the document to your destination format. Take this blog for instance. It&amp;rsquo;s written in Org-mode, which is exported to markdown for use by Hugo which will then compile it to HTML. The obvious choice for exporting your content would be to call the command directly within Emacs, but say you wanted to do this as a part of some other build process or as part of an automated continuous deployment process it would be necessary to invoke the export command from the shell.</description>

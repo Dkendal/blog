@@ -1,8 +1,8 @@
 +++
 title = "Batch export Org-mode pages"
 author = ["Dylan Kendal"]
-date = 2020-05-07T00:00:00-04:00
-lastmod = 2020-06-27T17:43:37-04:00
+date = 2020-06-27T18:03:00-04:00
+lastmod = 2020-06-27T18:05:12-04:00
 tags = ["emacs", "orgmode", "hugo"]
 draft = false
 weight = 2001

@@ -1,8 +1,8 @@
 +++
 title = "Capture the output of a Vim command"
 author = ["Dylan Kendal"]
-date = 2020-05-07T00:00:00-04:00
-lastmod = 2020-06-27T17:43:37-04:00
+date = 2020-06-24T22:54:00-04:00
+lastmod = 2020-06-27T18:05:12-04:00
 tags = ["vim"]
 draft = false
 weight = 2002

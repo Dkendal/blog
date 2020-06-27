@@ -4,6 +4,7 @@ title = "Dylan Kendal"
 publishDir = "docs"
 theme = "dkendal"
 paginate = 10
+enableGitInfo = true
 
 [params]
 homeTitle = "A Programming Blog"

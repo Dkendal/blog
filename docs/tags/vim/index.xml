@@ -6,7 +6,7 @@
     <description>Recent content in vim on Dylan Kendal</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Thu, 07 May 2020 00:00:00 -0400</lastBuildDate>
+    <lastBuildDate>Wed, 24 Jun 2020 22:54:00 -0400</lastBuildDate>
     
 	<atom:link href="/tags/vim/index.xml" rel="self" type="application/rss+xml" />
     
@@ -14,7 +14,7 @@
     <item>
       <title>Capture the output of a Vim command</title>
       <link>/posts/capture-the-output-of-vim-command/</link>
-      <pubDate>Thu, 07 May 2020 00:00:00 -0400</pubDate>
+      <pubDate>Wed, 24 Jun 2020 22:54:00 -0400</pubDate>
       
       <guid>/posts/capture-the-output-of-vim-command/</guid>
       <description>Vim ships with an internal pager named &amp;ldquo;more&amp;rdquo; for displaying command output that is used when the entire screen would be filled. Despite it&amp;rsquo;s name, more, it is not the command line utility that you might be familiar with, and because it&amp;rsquo;s a builtin feature vim cannot be configured to use an alternative (like less).
@@ -24,7 +24,7 @@ Much like it&amp;rsquo;s namesake, the internal more pager leaves a lot to be de
     <item>
       <title>Create a Vim quickfix list from the clipboard</title>
       <link>/posts/vim-quickfix-clipboard/</link>
-      <pubDate>Thu, 07 May 2020 00:00:00 -0400</pubDate>
+      <pubDate>Thu, 07 May 2020 14:34:00 -0400</pubDate>
       
       <guid>/posts/vim-quickfix-clipboard/</guid>
       <description>Do you find yourself editing a buffer containing file paths and you want to quickly switch between them?
