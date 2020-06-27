@@ -2,7 +2,9 @@
 
 exec >&2
 
-redo-ifchange ./assets/css/heights.css
+rm ./assets/css/heights.css
+redo ./assets/css/heights.css
+
 redo-ifchange ./content
 
 hugo --cleanDestinationDir

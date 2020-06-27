@@ -361,7 +361,6 @@ Below is the script in its entirety:
   
   Here is some text that follows the quote.
   
-     
 ** Source block
    
     #+begin_src elixir
@@ -383,6 +382,7 @@ Below is the script in its entirety:
     \\
     
     #+begin_src elixir
+    79 char line===================================================================
     79 char line===================================================================
     #+end_src
     

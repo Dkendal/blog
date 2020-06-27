@@ -1,14 +1,21 @@
 #!/usr/bin/env ruby
-a = 0.3
-b = 1
-x = 0
-y = 13
-n = 9
+def series
+  a = 0.4
+  b = 1
+  x = 0
+  y = 14
+  n = 9
+
+  (0..n).map do |i|
+    ((a * (1.618033 ** (i + x))) * b + y)
+  end
+end
+
 
 puts ":root {"
 
-(0..n).each do |i|
-  puts "  --v#{i}: #{((a * (1.618033 ** (i + x))) * b + y).ceil}px;"
+series.each_with_index do |n, idx|
+  puts "  --v#{idx}: #{n.ceil}px;"
 end
 
 puts "}"

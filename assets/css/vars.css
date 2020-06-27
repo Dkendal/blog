@@ -1,10 +1,12 @@
 :root {
   --fg-color: var(--bg0);
+  /* --bg-color: var(--light0-hard); */
   --bg-color: var(--light0-hard);
   --nav-height: 2rem;
   --content-width: 30rem;
   --heading-width: calc(var(--content-width) + 4rem);
   /* Approximitely a 79 character line */
-  --block-width: 48em;
-  --logo-color: var(--yellow);
+  --logo-color: var(--fg-color);
+  --code-font-size: var(--v3);
+  --code-block-width: 852px;
 }

@@ -3,11 +3,13 @@
 @import "assets/css/syntax.css";
 
 @custom-media --mobile (max-width: 700px);
+@custom-media --sub-code-block (max-width: 852px);
 
 @custom-selector :--heading h1, h2, h3, h4, h5, h6;
 @custom-selector :--content p, a, i, em, strong, span, ul, ol, div;
 @custom-selector :--text :--content, :--heading;
 @custom-selector :--inner-margin p, a, span, ul, ol, div, blockquote;
+@custom-selector :--code-fence .highlight .chroma;
 
 html, body {
   background-color: var(--bg-color);
@@ -77,8 +79,8 @@ body {
 
 a.logo {
   display: block;
-  font-weight: bold;
-  background: var(--fg-color);
+  font-weight: 900;
+  background: var(--bg-color);
   line-height: 2em;
   color: var(--logo-color);
   /* compensate for the skew */
@@ -86,11 +88,11 @@ a.logo {
   /* margin-right: 0.26794919em; */
   padding-left: 1em;
   padding-right: 1em;
-  transform: skew(-15deg);
+  /* transform: skew(-15deg); */
   position: relative;
   text-transform: uppercase;
   z-index: 2;
-  box-shadow: -5px 5px 0 2px var(--logo-color);
+  box-shadow: -2px 2px 0 3px var(--logo-color);
 
 }
 
@@ -141,8 +143,8 @@ nav {
   }
 
   & .block,
-  & > .highlight > .chroma {
-    max-width: var(--block-width);
+  & :--code-fence {
+    max-width: var(--code-block-width);
     width: 100%;
     border-radius: 3px;
     margin: 0 auto;
@@ -151,7 +153,7 @@ nav {
   & figure {
     margin: 2em auto;
     width: 100%;
-    max-width: var(--block-width);
+    max-width: var(--code-block-width);
     & img {
       width: inherit;
       max-width: inherit;
@@ -163,12 +165,9 @@ p > code {
   color: var(--red);
 }
 
-code, .chroma {
+code, :--code-fence {
   font-family: 'Source Code Pro', monospace;
-}
-
-.chroma {
-  /* font-size: 14px; */
+  font-size: var(--code-font-size);
 }
 
 main {
@@ -190,23 +189,21 @@ a:hover {
   text-decoration: underline;
 }
 
-@media (--mobile) {
-  .chroma {
-    /* font-size: 0.62461rem; */
+@media (--sub-code-block) {
+  .page-margins :--code-fence {
+    border-radius: 0;
   }
+}
 
+@media (--mobile) {
   .inner-margins,
   .outer-margins,
-  .page-margins > :not(.highlight, figure, img) {
+  .page-margins > :not(.highlight, figure, img, .wide-block) {
     margin-left: 1rem;
     margin-right: 1rem;
   }
 
   .highlight .chroma .lntable {
     padding: 0;
-  }
-
-  .page-margins .highlight .chroma {
-    border-radius: 0;
   }
 }
