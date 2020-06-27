@@ -9,7 +9,7 @@
 @custom-selector :--content p, a, i, em, strong, span, ul, ol, div;
 @custom-selector :--text :--content, :--heading;
 @custom-selector :--inner-margin p, a, span, ul, ol, div, blockquote;
-@custom-selector :--code-fence .highlight .chroma;
+@custom-selector :--code-fence .highlight > .chroma;
 
 html, body {
   background-color: var(--bg-color);
@@ -26,6 +26,7 @@ html, body {
 }
 
 :--heading {
+  font-family: 'Merriweather', serif;
   margin-top: 1em;
   margin-bottom: 1rem;
   word-wrap: break-word;
@@ -47,7 +48,7 @@ html, body, a {
 footer {
   display: flex;
   justify-content: center;
-  font-size: var(--v3);
+  font-size: var(--v2);
 }
 
 body {
@@ -166,9 +167,12 @@ p > code {
 }
 
 code, :--code-fence {
-  font-family: 'Source Code Pro', monospace;
-  font-size: var(--code-font-size);
+  font-family: 'source code pro', monospace;
 }
+
+:--code-fence {
+  font-size: var(--v4);
+  }
 
 main {
   flex-grow: 1;
@@ -189,21 +193,26 @@ a:hover {
   text-decoration: underline;
 }
 
-@media (--sub-code-block) {
-  .page-margins :--code-fence {
-    border-radius: 0;
-  }
-}
-
 @media (--mobile) {
   .inner-margins,
   .outer-margins,
-  .page-margins > :not(.highlight, figure, img, .wide-block) {
+  .page-margins > :not(.highlight, figure, img, .wide-block, .block) {
     margin-left: 1rem;
     margin-right: 1rem;
   }
 
-  .highlight .chroma .lntable {
+  :--code-fence {
+    font-size: var(--v3);
+  }
+
+  :--code-fence > .lntable {
     padding: 0;
+  }
+}
+
+@media (--sub-code-block) {
+  .page-margins :--code-fence {
+    margin: 0;
+    border-radius: 0;
   }
 }

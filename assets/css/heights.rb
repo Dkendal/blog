@@ -1,12 +1,12 @@
 #!/usr/bin/env ruby
 def series
-  a = 0.4
+  a = 0.3
   b = 1
   x = 0
-  y = 14
-  n = 9
+  y = 12
+  n = 10
 
-  (0..n).map do |i|
+  (1..n).map do |i|
     ((a * (1.618033 ** (i + x))) * b + y)
   end
 end
