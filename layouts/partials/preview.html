@@ -5,6 +5,15 @@
   <div class="inner-margins">
     {{ partial "postmeta.html" . }}
   </div>
+
+  {{ if .Params.tags }}
+    <div class="inner-margins">
+      {{ range .Params.tags }}
+        <a href="{{ $.Site.BaseURL }}/tags/{{ . | urlize }}/">#{{ . }}</a>&nbsp;
+      {{ end }}
+    </div>
+  {{ end }}
+
   <div class="inner-margins">
     {{ if .Truncated }}
       <p>{{ .Summary }}</p>
