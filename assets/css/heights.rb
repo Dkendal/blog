@@ -1,9 +1,9 @@
 #!/usr/bin/env ruby
 def series
   a = 0.3
-  b = 1
+  b = 0.85
   x = 0
-  y = 12
+  y = 13
   n = 10
 
   (1..n).map do |i|
