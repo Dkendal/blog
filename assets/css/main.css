@@ -78,6 +78,11 @@ body {
   text-align: center;
 }
 
+.asciicast {
+  display: flex !important;
+  justify-content: center;
+}
+
 a.logo {
   display: block;
   font-weight: 900;
