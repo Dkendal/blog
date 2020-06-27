@@ -1,0 +1,35 @@
+{{ if .IsHome }}
+  {{ if .Site.Params.homeTitle }}
+    {{ $.Scratch.Set "title" .Site.Params.homeTitle }}
+  {{ else }}
+    {{ $.Scratch.Set "title" .Site.Title }}
+  {{ end }}
+{{ else }}
+  {{ $.Scratch.Set "title" .Title }}
+{{ end }}
+
+{{ $title := $.Scratch.Get "title" }}
+
+{{ $class := "" }}
+{{ if .IsHome }}
+  {{ $class = "homepage" }}
+{{ end }}
+
+{{ if $title }}
+  <header class="{{ $class }}">
+    {{ partial "nav.html" . }}
+
+    <h1 class="outer-margins headline">
+    {{ if eq .Type "list" }}
+      {{ if .Data.Singular }}
+      #
+      {{ end }}
+      {{ .Title }}
+    {{ else }}
+      {{ with $title }}
+        {{.}}
+      {{ end }}
+    {{ end }}
+    </h1>
+  </header>
+{{ end }}

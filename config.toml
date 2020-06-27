@@ -6,9 +6,19 @@ theme = "dkendal"
 paginate = 10
 
 [params]
-homeTitle = "Dylan Kendal"
-description = "A programming blog."
+homeTitle = "A Programming Blog"
+description = ""
 mainSections = "posts"
+
+[params.nav.linkedin]
+url = "https://www.linkedin.com/in/dylan-kendal-24027545/"
+name = "Dylan's LinkedIn account"
+icon = "linkedin.svg"
+
+[params.nav.github]
+url = "https://github.com/Dkendal"
+name = "Dylan's GitHub account"
+icon = "github.svg"
 
 [author]
 name = "Dylan Kendal"

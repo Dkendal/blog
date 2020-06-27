@@ -33,39 +33,110 @@
   :export_hugo_section*: posts
   :CREATED:  <2020-05-07 Thu 10:54>
   :END:
-** DONE Create a Vim quickfix list from the clipboard                   :vim:
+** TODO Importing lua rocks dependencies from vim :vim:lua:
    :PROPERTIES:
-   :export_file_name: vim-quickfix-clipboard
-   :CREATED:  <2020-05-07 Thu 14:34>
+   :CREATED:  <2020-06-03 Wed 10:23>
    :END:
-
-   Do you find yourself editing a buffer containing file paths and you
-   want to quickly switch between them?
-
-   The =:cex[pr][!} {expr}= command executes any valid vim expression
-   (={expr}=) and constructs a quickfix list from each string of the output.
+   First check what version of lua your install of vim is packaged with with =:h lua=. At the time of writing the packaged version was 5.1.
+   Next make sure that your shell version of luarocks coresponds with a 5.1 minor version. I'm using asdf to manage versions so I install lua and luarocks with =asdf install lua 5.1.5=.
+   Make sure that =LUA_PATH= and =LUA_CPATH= is set. Fish is my shell, so I have a function in my =config.fish= that sets these variables from luarocks.
    
-   Assuming you've =set clipboard= to =unnamed= or =unamedplus=, you
-   can supply the clipboard register (=@*=, or =@+= respectively) as a
-   vim expression.
-   
-   #+begin_src vim -n 1
-   "assuming :set clipboard=unnamed
-   :cex @* 
+   #+begin_src fish
+    function fish_set_lua_path
+	set -xU LUA_PATH (luarocks path --lr-path)
+	set -xU LUA_CPATH (luarocks path --lr-cpath)
+    end
    #+end_src
    
-   or:
+   Debuggin problems:
+   - read =h: lua-require=
+   - Check package.cpath =:lua print(vim.inspect(package.cpath))= is your library in that path?
+   - rocks MUST be installed with a version of lua that matches vim's version. Vim will check for =**/5.1/*= paths, so if you installed with 5.3 it will be in a different directory.
+     
+   Test that your package is present:
+   
+   #+begin_src fish
+   luarocks install --local lpeg
+   #+end_src
+   
+   #+begin_src vimrc
+   :lua print(vim.inspect(require('lpeg')))
+   #+end_src
+   
+   #+begin_src fish
+   nvim -V1 -Es -c"lua print(vim.inspect(require('lpeg')))" 2>&1
+   #+end_src
+   
+   You should see a print out of the module if it succeeds.
+
+** TODO elixir remote plugin neovim :elixir:
+   :PROPERTIES:
+   :CREATED:  <2020-05-29 Fri 14:54>
+   :END:
+** TODO lua scripting and lua rocks for vim plugin :vim:lua:
+   :PROPERTIES:
+   :CREATED:  <2020-05-29 Fri 14:54>
+   :END:
+** TODO Elixir Plug api token auth                                   :elixir:
+   :PROPERTIES:
+   :CREATED:  <2020-05-28 Thu 14:05>
+   :END:
+** TODO Spotify skipping through all tracks after reboot :linux:
+   :PROPERTIES:
+   :CREATED:  <2020-05-21 Thu 12:55>
+   :END:
+   Make sure that pulse audio is started
+** TODO Set the quickfix with mix errors                         :vim:elixir:
+   :PROPERTIES:
+   :CREATED:  <2020-05-11 Mon 13:33>
+   :END:
+** TODO Writing a sorbet codegeneration tool                    :ruby:sorbet:
+   :PROPERTIES:
+   :CREATED:  <2020-05-09 Sat 11:17>
+   :END:
+** TODO sorbet fixer using lua :ale:vim:lua:sorbet:
+   :PROPERTIES:
+   :CREATED:  <2020-05-08 Fri 15:52>
+   :END:
+   
+** TODO embedded syntax in vim                                          :vim:
+   :PROPERTIES:
+   :CREATED:  <2020-05-08 Fri 15:48>
+   :END:
+** TODO Execute visual selection in vimscript                           :vim:
+   :PROPERTIES:
+   :CREATED:  <2020-05-08 Fri 15:29>
+   :END:
+   Yank the text (which will put it in register 0)
+   Because a register is valid vim expression we can just execute the contents of the register with
    
    #+begin_src vim
-   "assuming :set clipboard=unnamedplus
-   :cex @+ 
+   :@0
    #+end_src
    
-   Now you can set the quickfix to the current contents of your
-   clipboard, note that your input will still have to match your [[https://neovim.io/doc/user/options.html#'errorformat'][errorformat]].
+   Execute a range
+   set mark 'a, 'b
    
-   @@html:<div class="block"><script id="asciicast-SHFPgdNJTVOH9j8RkSyQpQ2uz" src="https://asciinema.org/a/SHFPgdNJTVOH9j8RkSyQpQ2uz.js" async></script></div>@@
-** Capture the output of a Vim command                                  :vim:
+   #+begin_src vim
+   :'a,'b y | @0
+   #+end_src
+** TODO Filter the quickfix list to only valid entries :vim:
+   :PROPERTIES:
+   :CREATED:  <2020-05-08 Fri 14:33>
+   :END:
+** TODO Setting the quick fix from another kitty pane                   :vim:
+   :PROPERTIES:
+   :CREATED:  <2020-05-08 Fri 14:21>
+   :END:
+** TODO Org-pomodoro status in i3bar                                   :linux:i3:emacs:
+   :PROPERTIES:
+   :CREATED:  <2020-05-08 Fri 14:12>
+   :END:
+** TODO Build Interactive cli tools with FZF                           :linux:
+   :PROPERTIES:
+   :CREATED:  <2020-05-08 Fri 14:00>
+   :END:
+** DONE Capture the output of a Vim command                             :vim:
    :PROPERTIES:
    :CREATED:  <2020-06-24 Wed 22:54>
    :export_file_name: capture-the-output-of-vim-command
@@ -207,109 +278,38 @@ Below is the script in its entirety:
   command! -nargs=1 -bang P call s:capture(<q-args>, <bang>0)
 #+end_src
    
-** TODO Writing a sorbet codegeneration tool                    :ruby:sorbet:
+** DONE Create a Vim quickfix list from the clipboard                   :vim:
    :PROPERTIES:
-   :CREATED:  <2020-05-09 Sat 11:17>
+   :export_file_name: vim-quickfix-clipboard
+   :CREATED:  <2020-05-07 Thu 14:34>
    :END:
-** TODO Spotify skipping through all tracks after reboot :linux:
-   :PROPERTIES:
-   :CREATED:  <2020-05-21 Thu 12:55>
-   :END:
-   Make sure that pulse audio is started
-** TODO Build Interactive cli tools with FZF                           :linux:
-   :PROPERTIES:
-   :CREATED:  <2020-05-08 Fri 14:00>
-   :END:
-** TODO Org-pomodoro status in i3bar                                   :linux:i3:emacs:
-   :PROPERTIES:
-   :CREATED:  <2020-05-08 Fri 14:12>
-   :END:
-** TODO Setting the quick fix from another kitty pane                   :vim:
-   :PROPERTIES:
-   :CREATED:  <2020-05-08 Fri 14:21>
-   :END:
-** TODO Filter the quickfix list to only valid entries :vim:
-   :PROPERTIES:
-   :CREATED:  <2020-05-08 Fri 14:33>
-   :END:
-** TODO embedded syntax in vim                                          :vim:
-   :PROPERTIES:
-   :CREATED:  <2020-05-08 Fri 15:48>
-   :END:
-** TODO sorbet fixer using lua :ale:vim:lua:sorbet:
-   :PROPERTIES:
-   :CREATED:  <2020-05-08 Fri 15:52>
-   :END:
-   
-** TODO Execute visual selection in vimscript                           :vim:
-   :PROPERTIES:
-   :CREATED:  <2020-05-08 Fri 15:29>
-   :END:
-   Yank the text (which will put it in register 0)
-   Because a register is valid vim expression we can just execute the contents of the register with
-   
-   #+begin_src vim
-   :@0
-   #+end_src
-   
-   Execute a range
-   set mark 'a, 'b
-   
-   #+begin_src vim
-   :'a,'b y | @0
-   #+end_src
-** TODO Set the quickfix with mix errors                         :vim:elixir:
-   :PROPERTIES:
-   :CREATED:  <2020-05-11 Mon 13:33>
-   :END:
-** TODO Elixir Plug api token auth                                   :elixir:
-   :PROPERTIES:
-   :CREATED:  <2020-05-28 Thu 14:05>
-   :END:
-** TODO lua scripting and lua rocks for vim plugin :vim:lua:
-   :PROPERTIES:
-   :CREATED:  <2020-05-29 Fri 14:54>
-   :END:
-** TODO Importing lua rocks dependencies from vim :vim:lua:
-   :PROPERTIES:
-   :CREATED:  <2020-06-03 Wed 10:23>
-   :END:
-   First check what version of lua your install of vim is packaged with with =:h lua=. At the time of writing the packaged version was 5.1.
-   Next make sure that your shell version of luarocks coresponds with a 5.1 minor version. I'm using asdf to manage versions so I install lua and luarocks with =asdf install lua 5.1.5=.
-   Make sure that =LUA_PATH= and =LUA_CPATH= is set. Fish is my shell, so I have a function in my =config.fish= that sets these variables from luarocks.
-   
-   #+begin_src fish
-    function fish_set_lua_path
-	set -xU LUA_PATH (luarocks path --lr-path)
-	set -xU LUA_CPATH (luarocks path --lr-cpath)
-    end
-   #+end_src
-   
-   Debuggin problems:
-   - read =h: lua-require=
-   - Check package.cpath =:lua print(vim.inspect(package.cpath))= is your library in that path?
-   - rocks MUST be installed with a version of lua that matches vim's version. Vim will check for =**/5.1/*= paths, so if you installed with 5.3 it will be in a different directory.
-     
-   Test that your package is present:
-   
-   #+begin_src fish
-   luarocks install --local lpeg
-   #+end_src
-   
-   #+begin_src vimrc
-   :lua print(vim.inspect(require('lpeg')))
-   #+end_src
-   
-   #+begin_src fish
-   nvim -V1 -Es -c"lua print(vim.inspect(require('lpeg')))" 2>&1
-   #+end_src
-   
-   You should see a print out of the module if it succeeds.
 
-** TODO elixir remote plugin neovim :elixir:
-   :PROPERTIES:
-   :CREATED:  <2020-05-29 Fri 14:54>
-   :END:
+   Do you find yourself editing a buffer containing file paths and you
+   want to quickly switch between them?
+
+   The =:cex[pr][!} {expr}= command executes any valid vim expression
+   (={expr}=) and constructs a quickfix list from each string of the output.
+   
+   Assuming you've =set clipboard= to =unnamed= or =unamedplus=, you
+   can supply the clipboard register (=@*=, or =@+= respectively) as a
+   vim expression.
+   
+   #+begin_src vim -n 1
+   "assuming :set clipboard=unnamed
+   :cex @* 
+   #+end_src
+   
+   or:
+   
+   #+begin_src vim
+   "assuming :set clipboard=unnamedplus
+   :cex @+ 
+   #+end_src
+   
+   Now you can set the quickfix to the current contents of your
+   clipboard, note that your input will still have to match your [[https://neovim.io/doc/user/options.html#'errorformat'][errorformat]].
+   
+   @@html:<div class="block"><script id="asciicast-SHFPgdNJTVOH9j8RkSyQpQ2uz" src="https://asciinema.org/a/SHFPgdNJTVOH9j8RkSyQpQ2uz.js" async></script></div>@@
 * Styleguide
   :PROPERTIES:
   :CREATED:  <2020-06-18 Thu 13:10>

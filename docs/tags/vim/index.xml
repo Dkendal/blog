@@ -12,7 +12,17 @@
     
     
     <item>
-      <title>Create a vim quickfix list from the clipboard</title>
+      <title>Capture the output of a Vim command</title>
+      <link>/posts/capture-the-output-of-vim-command/</link>
+      <pubDate>Thu, 07 May 2020 00:00:00 -0400</pubDate>
+      
+      <guid>/posts/capture-the-output-of-vim-command/</guid>
+      <description>Vim ships with an internal pager named &amp;ldquo;more&amp;rdquo; for displaying command output that is used when the entire screen would be filled. Despite it&amp;rsquo;s name, more, it is not the command line utility that you might be familiar with, and because it&amp;rsquo;s a builtin feature vim cannot be configured to use an alternative (like less).
+Much like it&amp;rsquo;s namesake, the internal more pager leaves a lot to be desired, like any ability to search the output.</description>
+    </item>
+    
+    <item>
+      <title>Create a Vim quickfix list from the clipboard</title>
       <link>/posts/vim-quickfix-clipboard/</link>
       <pubDate>Thu, 07 May 2020 00:00:00 -0400</pubDate>
       
@@ -21,16 +31,6 @@
 The :cex[pr][!} {expr} command executes any valid vim expression ({expr}) and constructs a quickfix list from each string of the output.
 Assuming you&amp;rsquo;ve set clipboard to unnamed or unamedplus, you can supply the clipboard register (@*, or @+ respectively) as a vim expression.
 1 2  &amp;#34;assuming :set clipboard=unnamed:cex @*   or:</description>
-    </item>
-    
-    <item>
-      <title>Capture the output of a Vim command</title>
-      <link>/posts/capture-the-output-of-vim-command/</link>
-      <pubDate>Thu, 07 May 2020 00:00:00 -0400</pubDate>
-      
-      <guid>/posts/capture-the-output-of-vim-command/</guid>
-      <description>Vim ships with an internal pager named &amp;ldquo;more&amp;rdquo; for displaying command output that is used when the entire screen would be filled. Despite it&amp;rsquo;s name, more, it is not the command line utility that you might be familiar with, and because it&amp;rsquo;s a builtin feature vim cannot be configured to use an alternative (like less).
-Much like it&amp;rsquo;s namesake, the internal more pager leaves a lot to be desired, like any ability to search the output.</description>
     </item>
     
   </channel>
