@@ -2,7 +2,7 @@
 title = "Create a Vim quickfix list from the clipboard"
 author = ["Dylan Kendal"]
 date = 2020-05-07T14:34:00-04:00
-lastmod = 2020-06-27T18:05:12-04:00
+lastmod = 2020-06-28T22:58:13-04:00
 tags = ["vim"]
 draft = false
 weight = 2003

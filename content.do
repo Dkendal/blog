@@ -12,3 +12,5 @@ progn="(progn
 exec >&2
 
 emacs --batch --visit "$index" --eval "$progn" --kill
+
+rm content/**/*.md~
