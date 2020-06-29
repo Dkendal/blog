@@ -5,6 +5,7 @@ publishDir = "docs"
 theme = "dkendal"
 paginate = 10
 enableGitInfo = true
+staticDir = "static"
 
 [params]
 homeTitle = "A Programming Blog"
