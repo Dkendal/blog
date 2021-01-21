@@ -110,10 +110,10 @@ yes in kitty.conf for this to work.
 </code></pre></td></tr></table>
 </div>
 </div><p>After enabling <code>allow_remote_control</code>, we can make use of any of
-the <a href="https://sw.kovidgoyal.net/kitty/remote-control.html#kitty-set-colors"><code>kitty @ set-&lt;cmd&gt;</code></a> commands.</p>
+the <a href="https://sw.kovidgoyal.net/kitty/remote-control.html#kitty-set-colors">kitty @ set-<cmd> &hellip;</a> commands.</p>
 <p>This is what my kitty directory looks like. Normally I use a dark
-mode theme (<strong>gruvbox.dark.conf</strong>), but as my eyes get tired I&rsquo;ll
-switch over to my light theme (<strong>gruvbox.light.conf</strong>).</p>
+mode theme (gruvbox.dark.conf), but as my eyes get tired I&rsquo;ll
+switch over to my light theme (gruvbox.light.conf).</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre class="chroma"><code><span class="lnt">1
@@ -146,11 +146,11 @@ switch over to my light theme (<strong>gruvbox.light.conf</strong>).</p>
 <pre class="chroma"><code class="language-bash" data-lang="bash">kitty @ set-colors --all --configured ~/.config/kitty/colors/gruvbox.light.conf</code></pre></td></tr></table>
 </div>
 </div>
-<p>Voilà! <strong>&ndash;all</strong> changes all windows as the name implies, dropping
+<p>Voilà! <code>--all</code> changes all windows as the name implies, dropping
 this flag makes the command only target the current window.
-<strong>&ndash;configured</strong> makes the configuration sticky, and will affect all
+<code>--configured</code> makes the configuration sticky, and will affect all
 new windows in <strong><strong>this instance</strong></strong>.</p>
-<p>You can take this to the <strong><strong>next level</strong></strong> and create an interactive
+<p>You can take this to the next level and create an interactive
 CLI script to choose your color scheme. My next post will be on how to
 create interactive CLI tools using just FZF!</p>
 <div class="highlight"><div class="chroma">

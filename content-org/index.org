@@ -618,11 +618,11 @@ nimble options
    #+end_example
    
    After enabling =allow_remote_control=, we can make use of any of
-   the [[https://sw.kovidgoyal.net/kitty/remote-control.html#kitty-set-colors][=kitty @ set-<cmd>=]] commands.
+   the [[https://sw.kovidgoyal.net/kitty/remote-control.html#kitty-set-colors][kitty @ set-<cmd> ...]] commands.
    
    This is what my kitty directory looks like. Normally I use a dark
-   mode theme (*gruvbox.dark.conf*), but as my eyes get tired I'll
-   switch over to my light theme (*gruvbox.light.conf*).
+   mode theme (gruvbox.dark.conf), but as my eyes get tired I'll
+   switch over to my light theme (gruvbox.light.conf).
    
    #+begin_example
      ~/.config/kitty
@@ -640,12 +640,12 @@ nimble options
    kitty @ set-colors --all --configured ~/.config/kitty/colors/gruvbox.light.conf
    #+end_src
    
-   Voilà! *--all* changes all windows as the name implies, dropping
+   Voilà! =--all= changes all windows as the name implies, dropping
    this flag makes the command only target the current window.
-   *--configured* makes the configuration sticky, and will affect all
+   =--configured= makes the configuration sticky, and will affect all
    new windows in **this instance**.
    
-   You can take this to the **next level** and create an interactive
+   You can take this to the next level and create an interactive
    CLI script to choose your color scheme. My next post will be on how to
    create interactive CLI tools using just FZF!
    

@@ -2,7 +2,7 @@
 title = "Change Kitty shell color-scheme"
 author = ["Dylan Kendal"]
 date = 2021-01-20T23:05:00-05:00
-lastmod = 2021-01-21T00:24:44-05:00
+lastmod = 2021-01-21T00:39:52-05:00
 tags = ["fzf", "kitty", "fish"]
 draft = false
 weight = 2001
@@ -24,11 +24,11 @@ yes in kitty.conf for this to work.
 ```
 
 After enabling `allow_remote_control`, we can make use of any of
-the [`kitty @ set-<cmd>`](https://sw.kovidgoyal.net/kitty/remote-control.html#kitty-set-colors) commands.
+the [kitty @ set-<cmd> ...](https://sw.kovidgoyal.net/kitty/remote-control.html#kitty-set-colors) commands.
 
 This is what my kitty directory looks like. Normally I use a dark
-mode theme (**gruvbox.dark.conf**), but as my eyes get tired I'll
-switch over to my light theme (**gruvbox.light.conf**).
+mode theme (gruvbox.dark.conf), but as my eyes get tired I'll
+switch over to my light theme (gruvbox.light.conf).
 
 ```text
 ~/.config/kitty
@@ -46,12 +46,12 @@ switch over to my light theme (**gruvbox.light.conf**).
 kitty @ set-colors --all --configured ~/.config/kitty/colors/gruvbox.light.conf
 {{< /highlight >}}
 
-Voilà! **--all** changes all windows as the name implies, dropping
+Voilà! `--all` changes all windows as the name implies, dropping
 this flag makes the command only target the current window.
-**--configured** makes the configuration sticky, and will affect all
+`--configured` makes the configuration sticky, and will affect all
 new windows in ****this instance****.
 
-You can take this to the ****next level**** and create an interactive
+You can take this to the next level and create an interactive
 CLI script to choose your color scheme. My next post will be on how to
 create interactive CLI tools using just FZF!
 
