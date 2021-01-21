@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en-us"><meta charset="utf-8" />
+
+  <title>Change Kitty shell color-scheme - Dylan Kendal</title>
+
+
+
+
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+
+<link rel="stylesheet" href="/css/main.min.60bf64d75d468a0c4dcb2c5956a8e0aa59ff2b9ae59a64c6392e20448adb4902.css" />
+
+<script async defer data-domain="blog.dkendal.com" src="https://plausible.io/js/plausible.js"></script>
+
+<meta name="generator" content="Hugo 0.72.0" /><body>
+  
+
+
+
+
+
+
+
+
+  <header class="">
+    <nav class="outer-margins">
+  <a class="logo" href="/" title="Return home">Dylan Kendal</a>
+
+  <ul class="nav-list">
+    
+      
+        <li>
+          <a href="https://github.com/Dkendal" name="Dylan&#39;s GitHub account" title="Dylan&#39;s GitHub account">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"><path fill="none" d="M0 0h24v24H0z"/><path d="M12 2C6.475 2 2 6.475 2 12a9.994 9.994 0 0 0 6.838 9.488c.5.087.687-.213.687-.476 0-.237-.013-1.024-.013-1.862-2.512.463-3.162-.612-3.362-1.175-.113-.288-.6-1.175-1.025-1.413-.35-.187-.85-.65-.013-.662.788-.013 1.35.725 1.538 1.025.9 1.512 2.338 1.087 2.912.825.088-.65.35-1.087.638-1.337-2.225-.25-4.55-1.113-4.55-4.938 0-1.088.387-1.987 1.025-2.688-.1-.25-.45-1.275.1-2.65 0 0 .837-.262 2.75 1.026a9.28 9.28 0 0 1 2.5-.338c.85 0 1.7.112 2.5.337 1.912-1.3 2.75-1.024 2.75-1.024.55 1.375.2 2.4.1 2.65.637.7 1.025 1.587 1.025 2.687 0 3.838-2.337 4.688-4.562 4.938.362.312.675.912.675 1.85 0 1.337-.013 2.412-.013 2.75 0 .262.188.574.688.474A10.016 10.016 0 0 0 22 12c0-5.525-4.475-10-10-10z"/></svg>
+
+          </a>
+        </li>
+      
+    
+      
+        <li>
+          <a href="https://www.linkedin.com/in/dylan-kendal-24027545/" name="Dylan&#39;s LinkedIn account" title="Dylan&#39;s LinkedIn account">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"><path fill="none" d="M0 0h24v24H0z"/><path d="M4 3h16a1 1 0 0 1 1 1v16a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1zm1 2v14h14V5H5zm2.5 4a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm-1 1h2v7.5h-2V10zm5.5.43c.584-.565 1.266-.93 2-.93 2.071 0 3.5 1.679 3.5 3.75v4.25h-2v-4.25a1.75 1.75 0 0 0-3.5 0v4.25h-2V10h2v.43z"/></svg>
+
+          </a>
+        </li>
+      
+    
+  </ul>
+</nav>
+
+
+    <h1 class="outer-margins headline">
+    
+      
+        Change Kitty shell color-scheme
+      
+    
+    </h1>
+  </header>
+
+<main>
+  <section>
+    <article class="page-margins">
+      <div>
+        <span>
+  Jan 20, 2021
+  
+</span>
+
+      </div>
+
+      
+        <div>
+          
+            <a href="//tags/fzf/">#fzf</a>&nbsp;
+          
+            <a href="//tags/kitty/">#kitty</a>&nbsp;
+          
+            <a href="//tags/fish/">#fish</a>&nbsp;
+          
+        </div>
+      
+
+      <br>
+
+      
+        <p>One of the more <a href="https://github.com/kovidgoyal/kitty/issues?q=is%3Aissue+reload+config">persistant complaints</a> about the Kitty shell is the
+inability to reload configuration. While you can&rsquo;t change every
+option at runtime, you can change most display properties on fly if
+you enable <a href="https://sw.kovidgoyal.net/kitty/remote-control.html?highlight=remote%20control">remote control</a> first. After this small tweak you can
+change color schemes, window padding, and font sizes on demand in
+a single, or all windows; current, and future.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-text" data-lang="text">❯ kitty @ --help
+Usage: kitty @ [options] command ...
+
+Control kitty by sending it commands. Set the allow_remote_control option to
+yes in kitty.conf for this to work.
+</code></pre></td></tr></table>
+</div>
+</div><p>After enabling <code>allow_remote_control</code>, we can make use of any of
+the <a href="https://sw.kovidgoyal.net/kitty/remote-control.html#kitty-set-colors"><code>kitty @ set-&lt;cmd&gt;</code></a> commands.</p>
+<p>This is what my kitty directory looks like. Normally I use a dark
+mode theme (<strong>gruvbox.dark.conf</strong>), but as my eyes get tired I&rsquo;ll
+switch over to my light theme (<strong>gruvbox.light.conf</strong>).</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span><span class="lnt">9
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-text" data-lang="text">~/.config/kitty
+❯ exa -T
+.
+├── colors
+│  ├── gruvbox.dark.conf
+│  ├── gruvbox.light.conf
+│  └── snazzy.conf
+├── diff.conf
+└── kitty.conf
+</code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash">kitty @ set-colors --all --configured ~/.config/kitty/colors/gruvbox.light.conf</code></pre></td></tr></table>
+</div>
+</div>
+<p>Voilà! <strong>&ndash;all</strong> changes all windows as the name implies, dropping
+this flag makes the command only target the current window.
+<strong>&ndash;configured</strong> makes the configuration sticky, and will affect all
+new windows in <strong><strong>this instance</strong></strong>.</p>
+<p>You can take this to the <strong><strong>next level</strong></strong> and create an interactive
+CLI script to choose your color scheme. My next post will be on how to
+create interactive CLI tools using just FZF!</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="nv">header</span><span class="o">=</span><span class="s2">&#34;press &lt;enter&gt; to enable colorscheme, &lt;C-c&gt; to exit.&#34;</span>
+<span class="nv">bindings</span><span class="o">=</span><span class="s1">&#39;enter:execute-silent(kitty @ set-colors {})&#39;</span>
+<span class="nv">preview</span><span class="o">=</span><span class="s1">&#39;bat {}&#39;</span>
+find ~/.config/kitty/colors/ -name <span class="s1">&#39;*.conf&#39;</span>
+    fzf --header <span class="s2">&#34;</span><span class="nv">$header</span><span class="s2">&#34;</span> --bind <span class="s2">&#34;</span><span class="nv">$bindigs</span><span class="s2">&#34;</span> --preview <span class="s2">&#34;</span><span class="nv">$preview</span><span class="s2">&#34;</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>Here it is in action.</p>
+<p><video controls
+src="/video/1fe86b9a71474352-kitty-fzf-colorscheme-change.webm">
+</video></p>
+<p>[[][fzf kitty color scheme picker]]</p>
+<p>If you use fish shell you can copy the function below to have a color
+scheme toggle with auto completion</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fish" data-lang="fish"><span class="c"># ~/.config/fish/functions/kitty-colorscheme.fish
+</span><span class="c"></span><span class="k">function</span> kitty-colorscheme -a colorscheme
+  kitty @ <span class="k">set</span>-colors --all --configured ~/.config/kitty/colors/<span class="nv">$colorscheme</span>.conf
+<span class="k">end</span>
+
+<span class="k">set</span> -l colorschemes <span class="o">(</span>fd <span class="s1">&#39;conf&#39;</span> ~/.config/kitty/colors <span class="o">|</span> rg <span class="nv">$HOME</span><span class="s1">&#39;/.config/kitty/colors/(.*)\.conf&#39;</span> --replace <span class="s1">&#39;$1&#39;</span><span class="o">)</span>
+
+<span class="nb">complete</span> -c kitty-colorscheme --no-files --require-parameter --arguments <span class="s2">&#34;</span><span class="nv">$colorschemes</span><span class="s2">&#34;</span></code></pre></td></tr></table>
+</div>
+</div>
+
+      
+
+    </article>
+
+    
+  </section>
+
+    </main><footer>
+
+  <p>
+    Dylan Kendal
+    &copy;
+    2021
+  </p>
+</footer>
+</body>
+</html>

@@ -2,10 +2,10 @@
 title = "Batch export Org-mode pages"
 author = ["Dylan Kendal"]
 date = 2020-06-27T18:03:00-04:00
-lastmod = 2020-06-28T22:58:12-04:00
+lastmod = 2021-01-21T00:02:04-05:00
 tags = ["emacs", "orgmode", "hugo"]
 draft = false
-weight = 2001
+weight = 2002
 +++
 
 A common task if - like me - you use _Org-mode_ to create static

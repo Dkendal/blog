@@ -8,6 +8,11 @@
   </url>
   
   <url>
+    <loc>/posts/change-kitty-shell-color-scheme/</loc>
+    <lastmod>2021-01-21T00:20:01-05:00</lastmod>
+  </url>
+  
+  <url>
     <loc>/posts/batch-export-org-mode-pages/</loc>
     <lastmod>2020-06-28T22:58:23-04:00</lastmod>
   </url>
@@ -20,6 +25,36 @@
   <url>
     <loc>/posts/vim-quickfix-clipboard/</loc>
     <lastmod>2020-06-28T22:58:23-04:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/</loc>
+    <lastmod>2021-01-21T00:20:01-05:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/tags/fish/</loc>
+    <lastmod>2021-01-21T00:20:01-05:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/tags/fzf/</loc>
+    <lastmod>2021-01-21T00:20:01-05:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/tags/kitty/</loc>
+    <lastmod>2021-01-21T00:20:01-05:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/posts/</loc>
+    <lastmod>2021-01-21T00:20:01-05:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/tags/</loc>
+    <lastmod>2021-01-21T00:20:01-05:00</lastmod>
   </url>
   
   <url>
@@ -38,22 +73,7 @@
   </url>
   
   <url>
-    <loc>/posts/</loc>
-    <lastmod>2020-06-28T22:58:23-04:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/tags/</loc>
-    <lastmod>2020-06-28T22:58:23-04:00</lastmod>
-  </url>
-  
-  <url>
     <loc>/tags/vim/</loc>
-    <lastmod>2020-06-28T22:58:23-04:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/</loc>
     <lastmod>2020-06-28T22:58:23-04:00</lastmod>
   </url>
   

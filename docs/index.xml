@@ -6,7 +6,7 @@
     <description>Recent content on Dylan Kendal</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Thu, 07 May 2020 00:00:00 -0400</lastBuildDate>
+    <lastBuildDate>Wed, 20 Jan 2021 23:05:00 -0500</lastBuildDate>
     
 	<atom:link href="/index.xml" rel="self" type="application/rss+xml" />
     
@@ -19,6 +19,16 @@
       <guid>/styleguide/</guid>
       <description>Alphabet test (1)abcdefghijklmnopqrstuvwxyz(2)abcdefghijklmnopqrstuvwxyz(3)abcdefghijklmnopqrstuvwxyz
 Paragraphs Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</description>
+    </item>
+    
+    <item>
+      <title>Change Kitty shell color-scheme</title>
+      <link>/posts/change-kitty-shell-color-scheme/</link>
+      <pubDate>Wed, 20 Jan 2021 23:05:00 -0500</pubDate>
+      
+      <guid>/posts/change-kitty-shell-color-scheme/</guid>
+      <description>One of the more persistant complaints about the Kitty shell is the inability to reload configuration. While you can&amp;rsquo;t change every option at runtime, you can change most display properties on fly if you enable remote control first. After this small tweak you can change color schemes, window padding, and font sizes on demand in a single, or all windows; current, and future.
+1 2 3 4 5  ❯ kitty @ --help Usage: kitty @ [options] command .</description>
     </item>
     
     <item>

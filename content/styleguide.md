@@ -2,7 +2,7 @@
 title = "Styleguide"
 author = ["Dylan Kendal"]
 date = 2020-05-07T00:00:00-04:00
-lastmod = 2020-06-28T22:58:13-04:00
+lastmod = 2021-01-21T00:02:05-05:00
 draft = false
 weight = 1001
 +++

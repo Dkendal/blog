@@ -10,11 +10,11 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
 
-<link rel="stylesheet" href="/css/main.min.f437d2be181d728f1a56caeb7cff403fca3c07a36ffe5a68d45b0433537320f3.css" />
+<link rel="stylesheet" href="/css/main.min.60bf64d75d468a0c4dcb2c5956a8e0aa59ff2b9ae59a64c6392e20448adb4902.css" />
 
 <script async defer data-domain="blog.dkendal.com" src="https://plausible.io/js/plausible.js"></script>
 
-<meta name="generator" content="Hugo 0.71.0" /><body>
+<meta name="generator" content="Hugo 0.72.0" /><body>
   
 
 
@@ -216,7 +216,7 @@ buffer or searching with fzf on demand.</p>
 </span><span class="err"></span>  <span class="k">endif</span><span class="err">
 </span><span class="err"></span><span class="k">endfunction</span><span class="err">
 </span><span class="err">
-</span><span class="err"></span><span class="nx">command</span><span class="p">!</span> <span class="p">-</span><span class="nx">nargs</span><span class="p">=</span><span class="m">1</span> <span class="nx">P</span> <span class="nx">call</span> <span class="nx">s</span>:<span class="nx">capture</span><span class="p">(&lt;</span><span class="nx">q</span><span class="p">-</span><span class="nx">args</span><span class="p">&gt;,</span> <span class="p">&lt;</span><span class="nx">bang</span><span class="p">&gt;</span><span class="m">0</span><span class="p">)</span></code></pre></td></tr></table>
+</span><span class="err"></span><span class="nx">command</span><span class="p">!</span> <span class="p">-</span><span class="nx">nargs</span><span class="p">=</span><span class="m">1</span> <span class="p">-</span><span class="nx">bang</span> <span class="p">-</span><span class="nx">complete</span><span class="p">=</span><span class="nx">command</span> <span class="nx">P</span> <span class="nx">call</span> <span class="nx">s</span>:<span class="nx">capture</span><span class="p">(&lt;</span><span class="nx">q</span><span class="p">-</span><span class="nx">args</span><span class="p">&gt;,</span> <span class="p">&lt;</span><span class="nx">bang</span><span class="p">&gt;</span><span class="m">0</span><span class="p">)</span></code></pre></td></tr></table>
 </div>
 </div>
 <p>Below is the script in its entirety:</p>
@@ -295,7 +295,7 @@ buffer or searching with fzf on demand.</p>
 </span><span class="err"></span>  <span class="k">endif</span><span class="err">
 </span><span class="err"></span><span class="k">endfunction</span><span class="err">
 </span><span class="err">
-</span><span class="err"></span><span class="nx">command</span><span class="p">!</span> <span class="p">-</span><span class="nx">nargs</span><span class="p">=</span><span class="m">1</span> <span class="p">-</span><span class="nx">bang</span> <span class="nx">P</span> <span class="nx">call</span> <span class="nx">s</span>:<span class="nx">capture</span><span class="p">(&lt;</span><span class="nx">q</span><span class="p">-</span><span class="nx">args</span><span class="p">&gt;,</span> <span class="p">&lt;</span><span class="nx">bang</span><span class="p">&gt;</span><span class="m">0</span><span class="p">)</span></code></pre></td></tr></table>
+</span><span class="err"></span><span class="nx">command</span><span class="p">!</span> <span class="p">-</span><span class="nx">nargs</span><span class="p">=</span><span class="m">1</span> <span class="p">-</span><span class="nx">bang</span> <span class="p">-</span><span class="nx">complete</span><span class="p">=</span><span class="nx">command</span> <span class="nx">P</span> <span class="nx">call</span> <span class="nx">s</span>:<span class="nx">capture</span><span class="p">(&lt;</span><span class="nx">q</span><span class="p">-</span><span class="nx">args</span><span class="p">&gt;,</span> <span class="p">&lt;</span><span class="nx">bang</span><span class="p">&gt;</span><span class="m">0</span><span class="p">)</span></code></pre></td></tr></table>
 </div>
 </div>
 
@@ -311,7 +311,7 @@ buffer or searching with fzf on demand.</p>
   <p>
     Dylan Kendal
     &copy;
-    2020
+    2021
   </p>
 </footer>
 </body>

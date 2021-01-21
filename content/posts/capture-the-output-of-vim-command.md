@@ -2,10 +2,10 @@
 title = "Capture the output of a Vim command"
 author = ["Dylan Kendal"]
 date = 2020-06-24T22:54:00-04:00
-lastmod = 2020-06-28T22:58:12-04:00
+lastmod = 2021-01-21T00:02:05-05:00
 tags = ["vim"]
 draft = false
-weight = 2002
+weight = 2003
 +++
 
 Vim ships with an internal pager named "more" for displaying
@@ -96,7 +96,7 @@ function s:capture(expr, bang) abort
   endif
 endfunction
 
-command! -nargs=1 P call s:capture(<q-args>, <bang>0)
+command! -nargs=1 -bang -complete=command P call s:capture(<q-args>, <bang>0)
 {{< /highlight >}}
 
 Below is the script in its entirety:
@@ -137,5 +137,5 @@ function s:capture(expr, bang) abort
   endif
 endfunction
 
-command! -nargs=1 -bang P call s:capture(<q-args>, <bang>0)
+command! -nargs=1 -bang -complete=command P call s:capture(<q-args>, <bang>0)
 {{< /highlight >}}
