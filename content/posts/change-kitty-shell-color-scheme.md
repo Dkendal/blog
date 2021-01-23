@@ -1,14 +1,14 @@
 +++
-title = "Change Kitty shell color-scheme"
+title = "Change Kitty terminal color-scheme"
 author = ["Dylan Kendal"]
 date = 2021-01-20T23:05:00-05:00
-lastmod = 2021-01-21T00:39:52-05:00
+lastmod = 2021-01-23T11:16:19-05:00
 tags = ["fzf", "kitty", "fish"]
 draft = false
 weight = 2001
 +++
 
-One of the more [persistant complaints](https://github.com/kovidgoyal/kitty/issues?q=is%3Aissue+reload+config) about the Kitty shell is the
+One of the more [persistant complaints](https://github.com/kovidgoyal/kitty/issues?q=is%3Aissue+reload+config) about the Kitty terminal emulator is the
 inability to reload configuration. While you can't change every
 option at runtime, you can change most display properties on fly if
 you enable [remote control](https://sw.kovidgoyal.net/kitty/remote-control.html?highlight=remote%20control) first. After this small tweak you can

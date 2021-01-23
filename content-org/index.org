@@ -595,14 +595,14 @@ nimble options
    those results, and then I open the file's in the resulting list.
    
    
-** DONE Change Kitty shell color-scheme :fzf:kitty:fish:
+** DONE Change Kitty terminal color-scheme                   :fzf:kitty:fish:
    CLOSED: [2021-01-20 Wed 23:05]
    :PROPERTIES:
    :CREATED:  <2021-01-20 Wed 22:28>
    :export_file_name: change-kitty-shell-color-scheme
    :END:
    
-   One of the more [[https://github.com/kovidgoyal/kitty/issues?q=is%3Aissue+reload+config][persistant complaints]] about the Kitty shell is the
+   One of the more [[https://github.com/kovidgoyal/kitty/issues?q=is%3Aissue+reload+config][persistant complaints]] about the Kitty terminal emulator is the
    inability to reload configuration. While you can't change every
    option at runtime, you can change most display properties on fly if
    you enable [[https://sw.kovidgoyal.net/kitty/remote-control.html?highlight=remote%20control][remote control]] first. After this small tweak you can

@@ -22,12 +22,12 @@ Paragraphs Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusm
     </item>
     
     <item>
-      <title>Change Kitty shell color-scheme</title>
+      <title>Change Kitty terminal color-scheme</title>
       <link>/posts/change-kitty-shell-color-scheme/</link>
       <pubDate>Wed, 20 Jan 2021 23:05:00 -0500</pubDate>
       
       <guid>/posts/change-kitty-shell-color-scheme/</guid>
-      <description>One of the more persistant complaints about the Kitty shell is the inability to reload configuration. While you can&amp;rsquo;t change every option at runtime, you can change most display properties on fly if you enable remote control first. After this small tweak you can change color schemes, window padding, and font sizes on demand in a single, or all windows; current, and future.
+      <description>One of the more persistant complaints about the Kitty terminal emulator is the inability to reload configuration. While you can&amp;rsquo;t change every option at runtime, you can change most display properties on fly if you enable remote control first. After this small tweak you can change color schemes, window padding, and font sizes on demand in a single, or all windows; current, and future.
 1 2 3 4 5  ❯ kitty @ --help Usage: kitty @ [options] command .</description>
     </item>
     
