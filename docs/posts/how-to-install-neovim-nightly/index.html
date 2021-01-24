@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en-us"><meta charset="utf-8" />
 
-  <title>Tags - Dylan Kendal</title>
+  <title>How to install Neovim nightly - Dylan Kendal</title>
 
 
 
@@ -55,7 +55,7 @@
     <h1 class="outer-margins headline">
     
       
-        Tags
+        How to install Neovim nightly
       
     
     </h1>
@@ -63,153 +63,58 @@
 
 <main>
   <section>
-    <div>
-      
-        
-      
-
-      
-        <article>
-  <a href="/tags/vim/">
-    <h2 class="outer-margins">vim</h2>
-  </a>
-  <div class="inner-margins">
-    <span>
+    <article class="page-margins">
+      <div>
+        <span>
   Jan 24, 2021
   
 </span>
 
-  </div>
-
-  
-
-  <div class="inner-margins">
-    
-  </div>
-</article>
+      </div>
 
       
-        <article>
-  <a href="/tags/fish/">
-    <h2 class="outer-margins">fish</h2>
-  </a>
-  <div class="inner-margins">
-    <span>
-  Jan 20, 2021
-  
-</span>
+        <div>
+          
+            <a href="//tags/vim/">#vim</a>&nbsp;
+          
+        </div>
+      
 
-  </div>
-
-  
-
-  <div class="inner-margins">
-    
-  </div>
-</article>
+      <br>
 
       
-        <article>
-  <a href="/tags/fzf/">
-    <h2 class="outer-margins">fzf</h2>
-  </a>
-  <div class="inner-margins">
-    <span>
-  Jan 20, 2021
-  
-</span>
-
-  </div>
-
-  
-
-  <div class="inner-margins">
-    
-  </div>
-</article>
-
-      
-        <article>
-  <a href="/tags/kitty/">
-    <h2 class="outer-margins">kitty</h2>
-  </a>
-  <div class="inner-margins">
-    <span>
-  Jan 20, 2021
-  
-</span>
-
-  </div>
-
-  
-
-  <div class="inner-margins">
-    
-  </div>
-</article>
+        <p>Here&rsquo;s a quick little script that you can use build and install the
+most recent release of Neovim.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="cp">#!/bin/bash
+</span><span class="cp"></span><span class="nb">cd</span> ~ <span class="o">||</span> <span class="nb">exit</span> <span class="m">1</span>
+sudo rm -r neovim <span class="o">||</span> <span class="nb">true</span>
+git clone https://github.com/neovim/neovim
+<span class="nb">cd</span> neovim <span class="o">||</span> <span class="nb">exit</span> <span class="m">1</span>
+sudo make <span class="nv">CMAKE_BUILD_TYPE</span><span class="o">=</span>Release install
+<span class="nb">cd</span> ~ <span class="o">||</span> <span class="nb">exit</span> <span class="m">1</span>
+sudo rm -r neovim</code></pre></td></tr></table>
+</div>
+</div>
+<p>I&rsquo;ve used this on both Linux and Mac OSX without issue. This script
+was originally posted on a Neovim GitHub issue tracker which I&rsquo;ve
+long since forgotten.</p>
+<p>More options for the make install task <a href="https://github.com/neovim/neovim/wiki/Installing-Neovim">here</a>.</p>
 
       
-        <article>
-  <a href="/tags/emacs/">
-    <h2 class="outer-margins">emacs</h2>
-  </a>
-  <div class="inner-margins">
-    <span>
-  Jun 27, 2020
-  
-</span>
 
-  </div>
-
-  
-
-  <div class="inner-margins">
-    
-  </div>
-</article>
-
-      
-        <article>
-  <a href="/tags/hugo/">
-    <h2 class="outer-margins">hugo</h2>
-  </a>
-  <div class="inner-margins">
-    <span>
-  Jun 27, 2020
-  
-</span>
-
-  </div>
-
-  
-
-  <div class="inner-margins">
-    
-  </div>
-</article>
-
-      
-        <article>
-  <a href="/tags/orgmode/">
-    <h2 class="outer-margins">orgmode</h2>
-  </a>
-  <div class="inner-margins">
-    <span>
-  Jun 27, 2020
-  
-</span>
-
-  </div>
-
-  
-
-  <div class="inner-margins">
-    
-  </div>
-</article>
-
-      
-    </div>
+    </article>
 
     
   </section>

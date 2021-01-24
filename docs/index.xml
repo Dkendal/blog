@@ -6,7 +6,7 @@
     <description>Recent content on Dylan Kendal</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Wed, 20 Jan 2021 23:05:00 -0500</lastBuildDate>
+    <lastBuildDate>Sun, 24 Jan 2021 13:02:00 -0500</lastBuildDate>
     
 	<atom:link href="/index.xml" rel="self" type="application/rss+xml" />
     
@@ -19,6 +19,16 @@
       <guid>/styleguide/</guid>
       <description>Alphabet test (1)abcdefghijklmnopqrstuvwxyz(2)abcdefghijklmnopqrstuvwxyz(3)abcdefghijklmnopqrstuvwxyz
 Paragraphs Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</description>
+    </item>
+    
+    <item>
+      <title>How to install Neovim nightly</title>
+      <link>/posts/how-to-install-neovim-nightly/</link>
+      <pubDate>Sun, 24 Jan 2021 13:02:00 -0500</pubDate>
+      
+      <guid>/posts/how-to-install-neovim-nightly/</guid>
+      <description>Here&amp;rsquo;s a quick little script that you can use build and install the most recent release of Neovim.
+1 2 3 4 5 6 7 8  #!/bin/bash cd ~ || exit 1 sudo rm -r neovim || true git clone https://github.com/neovim/neovim cd neovim || exit 1 sudo make CMAKE_BUILD_TYPE=Release install cd ~ || exit 1 sudo rm -r neovim   I&amp;rsquo;ve used this on both Linux and Mac OSX without issue.</description>
     </item>
     
     <item>

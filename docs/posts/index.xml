@@ -6,10 +6,20 @@
     <description>Recent content in Posts on Dylan Kendal</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Wed, 20 Jan 2021 23:05:00 -0500</lastBuildDate>
+    <lastBuildDate>Sun, 24 Jan 2021 13:02:00 -0500</lastBuildDate>
     
 	<atom:link href="/posts/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>How to install Neovim nightly</title>
+      <link>/posts/how-to-install-neovim-nightly/</link>
+      <pubDate>Sun, 24 Jan 2021 13:02:00 -0500</pubDate>
+      
+      <guid>/posts/how-to-install-neovim-nightly/</guid>
+      <description>Here&amp;rsquo;s a quick little script that you can use build and install the most recent release of Neovim.
+1 2 3 4 5 6 7 8  #!/bin/bash cd ~ || exit 1 sudo rm -r neovim || true git clone https://github.com/neovim/neovim cd neovim || exit 1 sudo make CMAKE_BUILD_TYPE=Release install cd ~ || exit 1 sudo rm -r neovim   I&amp;rsquo;ve used this on both Linux and Mac OSX without issue.</description>
+    </item>
     
     <item>
       <title>Change Kitty terminal color-scheme</title>
