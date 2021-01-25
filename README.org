@@ -6,7 +6,7 @@
   page.
 
 ** Building
-   This projet uses a [[https://github.com/apenwarr/redo/][redo]] [[./all.do][build script]] to convert org to markdown, run Hugo, and run some other code generation scripts.
+   This project uses a [[https://github.com/apenwarr/redo/][redo]] [[./all.do][build script]] to convert org to markdown, run Hugo, and run some other code generation scripts.
    
    #+begin_src bash
    redo
