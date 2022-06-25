@@ -10,11 +10,11 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
 
-<link rel="stylesheet" href="/css/main.min.1979f966f8dffc56f803c4777eeef61f67ecbe4df29f185eb2beca289d5d0fff.css" />
+<link rel="stylesheet" href="/css/main.css" />
 
 <script async defer data-domain="blog.dkendal.com" src="https://plausible.io/js/plausible.js"></script>
 
-<meta name="generator" content="Hugo 0.72.0" /><body>
+<meta name="generator" content="Hugo 0.92.0" /><body>
   
     
   
@@ -73,165 +73,6 @@
       
 
       
-        <article>
-  <a href="/posts/how-to-install-neovim-nightly/">
-    <h2 class="outer-margins">How to install Neovim nightly</h2>
-  </a>
-  <div class="inner-margins">
-    <span>
-  Jan 24, 2021
-  
-</span>
-
-  </div>
-
-  
-    <div class="inner-margins">
-      
-        <a href="//tags/vim/">#vim</a>&nbsp;
-      
-    </div>
-  
-
-  <div class="inner-margins">
-    
-      <p>Here&rsquo;s a quick little script that you can use build and install the most recent release of Neovim.
-1 2 3 4 5 6 7 8  #!/bin/bash cd ~ || exit 1 sudo rm -r neovim || true git clone https://github.com/neovim/neovim cd neovim || exit 1 sudo make CMAKE_BUILD_TYPE=Release install cd ~ || exit 1 sudo rm -r neovim   I&rsquo;ve used this on both Linux and Mac OSX without issue.</p>
-      <a href="/posts/how-to-install-neovim-nightly/">Read More</a>
-    
-  </div>
-</article>
-
-      
-        <article>
-  <a href="/posts/change-kitty-shell-color-scheme/">
-    <h2 class="outer-margins">Change Kitty terminal color-scheme</h2>
-  </a>
-  <div class="inner-margins">
-    <span>
-  Jan 20, 2021
-  
-</span>
-
-  </div>
-
-  
-    <div class="inner-margins">
-      
-        <a href="//tags/fzf/">#fzf</a>&nbsp;
-      
-        <a href="//tags/kitty/">#kitty</a>&nbsp;
-      
-        <a href="//tags/fish/">#fish</a>&nbsp;
-      
-    </div>
-  
-
-  <div class="inner-margins">
-    
-      <p>One of the more persistant complaints about the Kitty terminal emulator is the inability to reload configuration. While you can&rsquo;t change every option at runtime, you can change most display properties on fly if you enable remote control first. After this small tweak you can change color schemes, window padding, and font sizes on demand in a single, or all windows; current, and future.
-1 2 3 4 5  ❯ kitty @ --help Usage: kitty @ [options] command .</p>
-      <a href="/posts/change-kitty-shell-color-scheme/">Read More</a>
-    
-  </div>
-</article>
-
-      
-        <article>
-  <a href="/posts/batch-export-org-mode-pages/">
-    <h2 class="outer-margins">Batch export Org-mode pages</h2>
-  </a>
-  <div class="inner-margins">
-    <span>
-  Jun 27, 2020
-  
-</span>
-
-  </div>
-
-  
-    <div class="inner-margins">
-      
-        <a href="//tags/emacs/">#emacs</a>&nbsp;
-      
-        <a href="//tags/orgmode/">#orgmode</a>&nbsp;
-      
-        <a href="//tags/hugo/">#hugo</a>&nbsp;
-      
-    </div>
-  
-
-  <div class="inner-margins">
-    
-      <p>A common task if - like me - you use Org-mode to create static websites; is to export the document to your destination format. Take this blog for instance. It&rsquo;s written in Org-mode, which is exported to markdown for use by Hugo which will then compile it to HTML. The obvious choice for exporting your content would be to call the command directly within Emacs, but say you wanted to do this as a part of some other build process or as part of an automated continuous deployment process it would be necessary to invoke the export command from the shell.</p>
-      <a href="/posts/batch-export-org-mode-pages/">Read More</a>
-    
-  </div>
-</article>
-
-      
-        <article>
-  <a href="/posts/capture-the-output-of-vim-command/">
-    <h2 class="outer-margins">Capture the output of a Vim command</h2>
-  </a>
-  <div class="inner-margins">
-    <span>
-  Jun 24, 2020
-  
-</span>
-
-  </div>
-
-  
-    <div class="inner-margins">
-      
-        <a href="//tags/vim/">#vim</a>&nbsp;
-      
-    </div>
-  
-
-  <div class="inner-margins">
-    
-      <p>Vim ships with an internal pager named &ldquo;more&rdquo; for displaying command output that is used when the entire screen would be filled. Despite it&rsquo;s name, more, it is not the command line utility that you might be familiar with, and because it&rsquo;s a builtin feature vim cannot be configured to use an alternative (like less).
-Much like it&rsquo;s namesake, the internal more pager leaves a lot to be desired, like any ability to search the output.</p>
-      <a href="/posts/capture-the-output-of-vim-command/">Read More</a>
-    
-  </div>
-</article>
-
-      
-        <article>
-  <a href="/posts/vim-quickfix-clipboard/">
-    <h2 class="outer-margins">Create a Vim quickfix list from the clipboard</h2>
-  </a>
-  <div class="inner-margins">
-    <span>
-  May 7, 2020
-  
-</span>
-
-  </div>
-
-  
-    <div class="inner-margins">
-      
-        <a href="//tags/vim/">#vim</a>&nbsp;
-      
-    </div>
-  
-
-  <div class="inner-margins">
-    
-      <p>Do you find yourself editing a buffer containing file paths and you want to quickly switch between them?
-The :cex[pr][!} {expr} command executes any valid vim expression ({expr}) and constructs a quickfix list from each string of the output.
-Assuming you&rsquo;ve set clipboard to unnamed or unamedplus, you can supply the clipboard register (@*, or @+ respectively) as a vim expression.
-1 2  &#34;assuming :set clipboard=unnamed:cex @*   or:</p>
-      <a href="/posts/vim-quickfix-clipboard/">Read More</a>
-    
-  </div>
-</article>
-
-      
     </div>
 
     
@@ -242,7 +83,7 @@ Assuming you&rsquo;ve set clipboard to unnamed or unamedplus, you can supply the
   <p>
     Dylan Kendal
     &copy;
-    2021
+    0001
   </p>
 </footer>
 </body>

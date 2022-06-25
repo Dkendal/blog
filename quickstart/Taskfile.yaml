@@ -1,0 +1,21 @@
+# https://taskfile.dev
+
+version: '3'
+
+vars:
+  elisp_dir: '{{ if .EARTHLY  }}/root/.emacs.d{{ else }}./scripts/build/ox-hugo{{ end }}'
+
+tasks:
+  # ox-hugo:
+  #   interactive: true
+  #   sources:
+  #     - ./org/**/*
+  #   generates:
+  #     - ./content/**/*
+  #     - ./static/**/*
+  #   cmds:
+  #     - emacs --batch -l {{.elisp_dir}}/main.el
+  ox-hugo:
+    interactive: true
+    cmds:
+      - emacs --batch -l {{.elisp_dir}}/watch.el

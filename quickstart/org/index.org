@@ -5,11 +5,12 @@
 #+options: d:(not "LOGBOOK") date:t e:t email:nil f:t inline:t
 #+options: p:nil pri:nil prop:nil stat:t tags:t tasks:t tex:t
 #+options: timestamp:t title:t todo:t |:t
+
 #+startup: logdone
 
 #+author: Dylan Kendal
 #+bibliography:
-#+creator: Emacs 26.3 (Org mode fatal: not a git repository (or any of the parent directories): .git + ox-hugo)
+#+creator: Emacs
 #+date: <2020-05-07 Thu>
 #+description:
 #+email: dylankendal@gmail.com
@@ -20,18 +21,15 @@
 #+title: Dylan Kendal
 
 #+hugo_base_dir: ../
-#+hugo_section: ./
-
 #+hugo_date_format: %Y-%m-%dT%T%z
 #+hugo_front_matter_format: toml
 #+hugo_level_offset: 1
 #+hugo_auto_set_lastmod: t
 #+hugo_weight: auto
-#+HUGO_CODE_FENCE: nil
+#+hugo_code_fence: nil
 
 * Posts
   :PROPERTIES:
-  :export_hugo_section*: posts
   :CREATED:  <2020-05-07 Thu 10:54>
   :END:
 ** TODO Importing lua rocks dependencies from vim :vim:lua:
@@ -676,14 +674,13 @@ fix module resolve shims
 fix export maps
 
 
-
 ** DONE How to install Neovim nightly                                   :vim:
    CLOSED: [2021-01-24 Sun 13:02]
    :PROPERTIES:
    :CREATED:  <2021-01-24 Sun 12:56>
    :export_file_name: how-to-install-neovim-nightly
    :END:
-   
+
    Here's a quick little script that you can use build and install the
    most recent release of Neovim.
 
@@ -1027,6 +1024,7 @@ fix export maps
    clipboard, note that your input will still have to match your [[https://neovim.io/doc/user/options.html#'errorformat'][errorformat]].
    
    @@html:<div class="block"><script id="asciicast-SHFPgdNJTVOH9j8RkSyQpQ2uz" src="https://asciinema.org/a/SHFPgdNJTVOH9j8RkSyQpQ2uz.js" async></script></div>@@
+
 * Styleguide
   :PROPERTIES:
   :CREATED:  <2020-06-18 Thu 13:10>

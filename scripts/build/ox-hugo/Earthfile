@@ -1,0 +1,12 @@
+VERSION 0.6
+
+emacs:
+  FROM silex/emacs:28
+  COPY deps.el /root/.emacs.d/
+  RUN emacs --script /root/.emacs.d/deps.el
+
+export:
+  FROM +emacs
+  COPY main.el /root/.emacs.d/
+  WORKDIR /app
+  ENTRYPOINT ["emacs", "--batch", "-l", "/root/.emacs.d/main.el"]

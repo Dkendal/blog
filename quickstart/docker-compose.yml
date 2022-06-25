@@ -1,0 +1,25 @@
+---
+version: "3.8"
+
+services:
+  emacs:
+    image: blog.dkendal.com/emacs:latest
+    volumes:
+      - ./org:/app/org:ro
+      - content:/app/content:rw
+      - static:/app/static:rw
+  hugo:
+    image: klakegg/hugo:latest
+    command: server
+    ports:
+      - 1313:1313
+    volumes:
+      - ./config.toml:/src/config.toml:ro
+      - content:/src/content:ro
+      - static:/src/static:ro
+      - ./themes:/src/themes:ro
+      - ./archtypes:/src/archtypes:ro
+
+volumes:
+  content:
+  static:
