@@ -31,7 +31,7 @@ build:
   COPY +markdown/content ./
   COPY +markdown/static ./
   COPY --dir ./themes .
-  COPY --dir ./archtypes .
+  COPY --dir ./archetypes .
   RUN hugo build --minify --destination /www
   SAVE ARTIFACT /www www
 

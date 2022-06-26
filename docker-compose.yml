@@ -18,7 +18,7 @@ services:
       - content:/src/content:ro
       - static:/src/static:ro
       - ./themes:/src/themes:ro
-      - ./archtypes:/src/archtypes:ro
+      - ./archetypes:/src/archetypes:ro
 
 volumes:
   content:
