@@ -30,6 +30,7 @@ build:
   FROM +hugo
   COPY +markdown/content ./
   COPY +markdown/static ./
+  COPY ./static/*  ./static/
   COPY --dir ./themes .
   COPY --dir ./archetypes .
   RUN hugo build --minify --destination /www
