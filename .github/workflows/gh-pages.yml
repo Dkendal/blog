@@ -17,4 +17,12 @@ jobs:
           fetch-depth: 0
 
       - name: Build docs
-        run: earthly +docs
+        env:
+          GITHUB_TOKEN: "${{secrets.GITHUB_TOKEN}}"
+        run: |
+          earthly +docs
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          git config --global user.name "$GITHUB_ACTOR"
+          git add -Af docs
+          git commit -m "Update docs"
+          git push -fq origin @:gh-pages
