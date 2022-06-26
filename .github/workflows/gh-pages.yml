@@ -1,0 +1,20 @@
+on:
+  push:
+    branches:
+      - update
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: earthly/actions/setup-earthly@v1
+        with: { version: 'v0.6.17' }
+
+      - name: Checkout repository
+        uses: actions/checkout@v2
+        with:
+          submodules: recursive
+          fetch-depth: 0
+
+      - name: Build docs
+        run: earthly +docs
