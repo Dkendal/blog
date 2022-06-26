@@ -9,7 +9,6 @@ markdown:
   RUN --entrypoint
   SAVE ARTIFACT ./content content
   SAVE ARTIFACT ./static static
-  RUN --no-cache find
 
 markdown-watch:
   FROM ox-hugo+export
@@ -28,11 +27,15 @@ hugo:
 
 build:
   FROM +hugo
-  COPY +markdown/content ./
-  COPY +markdown/static ./
-  COPY ./static/*  ./static/
-  COPY --dir ./themes .
-  COPY --dir ./archetypes .
+  COPY --dir \
+    ./static \
+    ./themes \
+    ./archetypes \
+    .
+  COPY --dir \
+    +markdown/content \
+    +markdown/static \
+    .
   RUN hugo build --minify --destination /www
   SAVE ARTIFACT /www www
 
