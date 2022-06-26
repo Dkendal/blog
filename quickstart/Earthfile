@@ -13,8 +13,6 @@ markdown:
 
 markdown-watch:
   FROM ox-hugo+export
-  # COPY +task/task /usr/local/bin/task
-  # COPY Taskfile.yaml .
   ENV EARTHLY true
   ENTRYPOINT ["emacs", "-Q", "--batch", "--load", "$HOME/.emacs.d/watch.el"]
 
@@ -46,9 +44,3 @@ repl:
   WORKDIR /app
   COPY . /app
   RUN --interactive emacs --batch --eval "(while t (condition-case err (print (eval (read))) (error (print err))))"
-
-task:
-  FROM golang:1.18
-  RUN go install github.com/go-task/task/v3/cmd/task@latest
-  SAVE ARTIFACT /go/bin/task task
-

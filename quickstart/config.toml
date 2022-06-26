@@ -1,6 +1,31 @@
-baseURL = 'http://example.org/'
+baseURL = 'https://blog.dkendal.com/'
 languageCode = 'en-us'
-title = 'My New Hugo Site'
+title = 'Digital Janitorial Services'
 theme = 'archie'
+paginate = 10
+# enableGitInfo = true
+staticDir = "static"
 
 ignoreErrors = ["error-missing-instagram-accesstoken"]
+
+[author]
+name = "Dylan Kendal"
+
+[params]
+mode="toggle"
+subtitle = "A programming blog by Dylan Kendal"
+
+[[params.social]]
+url = "https://www.linkedin.com/in/dylan-kendal-24027545/"
+name = "Dylan's LinkedIn account"
+icon = "linkedin"
+
+[[params.social]]
+url = "https://github.com/Dkendal"
+name = "Dylan's GitHub account"
+icon = "github"
+
+[[menu.main]]
+name = "Home"
+url = "/"
+weight = 1

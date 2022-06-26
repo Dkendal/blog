@@ -21,6 +21,7 @@
 #+title: Dylan Kendal
 
 #+hugo_base_dir: ../
+#+hugo_section: pages
 #+hugo_date_format: %Y-%m-%dT%T%z
 #+hugo_front_matter_format: toml
 #+hugo_level_offset: 1
@@ -674,13 +675,14 @@ fix module resolve shims
 fix export maps
 
 
+
 ** DONE How to install Neovim nightly                                   :vim:
    CLOSED: [2021-01-24 Sun 13:02]
    :PROPERTIES:
    :CREATED:  <2021-01-24 Sun 12:56>
    :export_file_name: how-to-install-neovim-nightly
    :END:
-
+   
    Here's a quick little script that you can use build and install the
    most recent release of Neovim.
 
@@ -1024,8 +1026,7 @@ fix export maps
    clipboard, note that your input will still have to match your [[https://neovim.io/doc/user/options.html#'errorformat'][errorformat]].
    
    @@html:<div class="block"><script id="asciicast-SHFPgdNJTVOH9j8RkSyQpQ2uz" src="https://asciinema.org/a/SHFPgdNJTVOH9j8RkSyQpQ2uz.js" async></script></div>@@
-
-* Styleguide
+* TODO Styleguide 
   :PROPERTIES:
   :CREATED:  <2020-06-18 Thu 13:10>
   :export_file_name: styleguide
