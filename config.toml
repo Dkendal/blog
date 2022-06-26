@@ -1,57 +1,31 @@
-baseURL = "/"
-languageCode = "en-us"
-title = "Dylan Kendal"
-publishDir = "docs"
-theme = "dkendal"
+baseURL = 'https://blog.dkendal.com/'
+languageCode = 'en-us'
+title = 'Digital Janitorial Services'
+theme = 'archie'
 paginate = 10
-enableGitInfo = true
+# enableGitInfo = true
 staticDir = "static"
 
-[params]
-homeTitle = "A Programming Blog"
-description = ""
-mainSections = "posts"
-
-[params.nav.linkedin]
-url = "https://www.linkedin.com/in/dylan-kendal-24027545/"
-name = "Dylan's LinkedIn account"
-icon = "linkedin.svg"
-
-[params.nav.github]
-url = "https://github.com/Dkendal"
-name = "Dylan's GitHub account"
-icon = "github.svg"
+ignoreErrors = ["error-missing-instagram-accesstoken"]
 
 [author]
 name = "Dylan Kendal"
 
-[markup]
+[params]
+mode="toggle"
+subtitle = "A programming blog by Dylan Kendal"
 
-[markup.highlight]
-codeFences = true
-guessSyntax = false
-hl_Lines = ""
-lineNoStart = 1
-lineNos = true
-lineNumbersInTable = true
-noClasses = false
-# style = "dracula"
-tabWidth = 2
+[[params.social]]
+url = "https://www.linkedin.com/in/dylan-kendal-24027545/"
+name = "Dylan's LinkedIn account"
+icon = "linkedin"
 
-[markup.goldmark]
+[[params.social]]
+url = "https://github.com/Dkendal"
+name = "Dylan's GitHub account"
+icon = "github"
 
-[markup.goldmark.extensions]
-definitionList = true
-footnote = true
-linkify = true
-strikethrough = true
-table = true
-taskList = true
-typographer = true
-
-[markup.goldmark.renderer]
-unsafe = true
-
-[social]
-github = "https://github.com/Dkendal"
-linkedin = "https://www.linkedin.com/in/dylan-kendal-24027545/"
+[[menu.main]]
+name = "Home"
+url = "/"
+weight = 1

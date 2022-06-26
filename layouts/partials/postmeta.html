@@ -1,9 +1,0 @@
-<span>
-  {{ .Date.Format ( .Site.Params.dateformat | default "Jan 2, 2006") }}
-  {{ if .Params.categories }}
-    <br>
-    {{ range .Params.categories }}
-      <a href="{{ $.Site.BaseURL }}/categories/{{ . | urlize }}/">{{ . }}</a>&nbsp;
-    {{ end }}
-  {{ end }}
-</span>

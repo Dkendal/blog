@@ -1,6 +1,0 @@
-(require 'package)
-(package-initialize)
-(require 'ox-hugo)
-(find-file-read-only "/app/org/index.org")
-(org-hugo-export-wim-to-md :all-subtrees nil nil)
-(kill-emacs 0)

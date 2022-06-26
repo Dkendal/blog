@@ -7,6 +7,6 @@ emacs:
 
 export:
   FROM +emacs
-  COPY main.el /root/.emacs.d/
+  COPY *.el /root/.emacs.d/
   WORKDIR /app
   ENTRYPOINT ["emacs", "--batch", "-l", "/root/.emacs.d/main.el"]

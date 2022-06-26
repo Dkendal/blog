@@ -1,43 +1,52 @@
 VERSION 0.6
 
-# IMPORT ./scripts/build/ox-hugo AS export
+IMPORT ./scripts/build/ox-hugo AS ox-hugo
 
 markdown:
-  FROM ./scripts/build/ox-hugo+export
-  COPY --dir content-org .
+  FROM ox-hugo+export
+  COPY --dir org .
   RUN mkdir static
   RUN --entrypoint
   SAVE ARTIFACT ./content content
   SAVE ARTIFACT ./static static
+  RUN --no-cache find
 
-hugo:
-  FROM klakegg/hugo:debian
-  WORKDIR /app
-  COPY --dir ./content ./static ./themes .
-  COPY ./config.toml .
-
-  WORKDIR /app
-
-build:
-  FROM +hugo
-  RUN --entrypoint build
-
-server:
-  FROM +hugo
-  EXPOSE 1313
-  RUN --interactive --entrypoint server
-
+markdown-watch:
+  FROM ox-hugo+export
+  ENV EARTHLY true
+  ENTRYPOINT ["emacs", "-Q", "--batch", "--load", "$HOME/.emacs.d/watch.el"]
 
 locally-markdown:
   LOCALLY
   COPY +markdown/content ./
   COPY +markdown/static ./
 
-all:
-  FROM +emacs
+hugo:
+  FROM klakegg/hugo:debian
   WORKDIR /app
-  COPY . /app
-  RUN emacs --script ./scripts/build/main.el
+  COPY . .
+
+build:
+  FROM +hugo
+  COPY +markdown/content ./
+  COPY +markdown/static ./
+  COPY --dir ./themes .
+  COPY --dir ./archtypes .
+  RUN hugo build --destination /www
+  SAVE ARTIFACT /www www
+
+docs:
+  LOCALLY
+  COPY +build/www ./docs
+
+server:
+  LOCALLY
+  WITH DOCKER \
+    --pull klakegg/hugo:latest \
+    --load blog.dkendal.com/emacs:latest=+markdown-watch \
+    --compose docker-compose.yml
+    RUN docker-compose up --remove-orphans --abort-on-container-exit
+  END
 
 repl:
   FROM +emacs

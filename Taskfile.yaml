@@ -3,15 +3,10 @@
 version: '3'
 
 tasks:
-  default:
-    cmds:
-      - task start
-    silent: true
+  default: task server
 
-  start:
-    cmds:
-      - hugo serve
+  server: earthly +server
 
   build:
     cmds:
-      - earthly +all
+      - earthly +build
