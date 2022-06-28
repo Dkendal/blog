@@ -49,7 +49,7 @@ server:
     --pull klakegg/hugo:latest \
     --load blog.dkendal.com/emacs:latest=+markdown-watch \
     --compose docker-compose.yml
-    RUN docker-compose up --remove-orphans --abort-on-container-exit
+    RUN docker-compose up --remove-orphans --abort-on-container-exit; docker-compose down -v
   END
 
 repl:
