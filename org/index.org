@@ -33,6 +33,376 @@
 :PROPERTIES:
 :CREATED:  <2020-05-07 Thu 10:54>
 :END:
+** DONE Jest code coverage in Neovim           :vim:javascript:jest:testing:
+CLOSED: [2022-06-28 Tue]
+:PROPERTIES:
+:export_file_name: jest-code-coverage-neovim
+:END:
+
+I've been wanting to be able to view my code coverage directly within Vim for a long time.
+Not having to switch to browser or another window shortens the feedback loop, especially when developing a test for code you aren't familiar with.
+Wallaby.js is a VSCode extension that handles this really well:
+it lets you run tests directly in the buffer and annotates lines with a green or red square to indicate if then statement was covered.
+
+Well, as of today I'm happy to announce that you can have this in (Neo)vim as well!
+
+You can download it here: https://github.com/Dkendal/nvim-coverage
+   
+#+DOWNLOADED: screenshot @ 2022-06-28 10:23:52
+#+CAPTION: Green highlight in the sign column is a covered statement, count is how many times it was covered. Red sign column is an uncovered statement. Black and yellow is an =if= path not taken. Yellow is an uncovered branch.
+[[file:images/Posts/2022-06-28_10-23-52_screenshot.png]]
+   
+** DONE How to install Neovim nightly                                   :vim:
+CLOSED: [2021-01-24 Sun 13:02]
+:PROPERTIES:
+:CREATED:  <2021-01-24 Sun 12:56>
+:export_file_name: how-to-install-neovim-nightly
+:END:
+   
+Here's a quick little script that you can use build and install the
+most recent release of Neovim.
+
+#+begin_src bash
+  #!/bin/bash
+  cd ~ || exit 1
+  sudo rm -r neovim || true
+  git clone https://github.com/neovim/neovim
+  cd neovim || exit 1
+  sudo make CMAKE_BUILD_TYPE=Release install
+  cd ~ || exit 1
+  sudo rm -r neovim
+#+end_src
+   
+I've used this on both Linux and Mac OSX without issue. This script
+was originally posted on a Neovim GitHub issue tracker which I've
+long since forgotten.
+   
+More options for the make install task [[https://github.com/neovim/neovim/wiki/Installing-Neovim][here]].
+   
+** DONE Change Kitty terminal color-scheme                   :fzf:kitty:fish:
+CLOSED: [2021-01-20 Wed 23:05]
+:PROPERTIES:
+:CREATED:  <2021-01-20 Wed 22:28>
+:export_file_name: change-kitty-shell-color-scheme
+:END:
+   
+One of the more [[https://github.com/kovidgoyal/kitty/issues?q=is%3Aissue+reload+config][persistant complaints]] about the Kitty terminal emulator is the
+inability to reload configuration. While you can't change every
+option at runtime, you can change most display properties on fly if
+you enable [[https://sw.kovidgoyal.net/kitty/remote-control.html?highlight=remote%20control][remote control]] first. After this small tweak you can
+change color schemes, window padding, and font sizes on demand in
+a single, or all windows; current, and future.
+   
+#+begin_example
+  ❯ kitty @ --help
+  Usage: kitty @ [options] command ...
+
+  Control kitty by sending it commands. Set the allow_remote_control option to
+  yes in kitty.conf for this to work.
+#+end_example
+
+After enabling =allow_remote_control=, we can make use of any of
+the [[https://sw.kovidgoyal.net/kitty/remote-control.html#kitty-set-colors][kitty @ set-<cmd> ...]] commands.
+   
+This is what my kitty directory looks like. Normally I use a dark
+mode theme (gruvbox.dark.conf), but as my eyes get tired I'll
+switch over to my light theme (gruvbox.light.conf).
+   
+#+begin_example
+  ~/.config/kitty
+  ❯ exa -T
+  .
+  ├── colors
+  │  ├── gruvbox.dark.conf
+  │  ├── gruvbox.light.conf
+  │  └── snazzy.conf
+  ├── diff.conf
+  └── kitty.conf
+#+end_example
+
+#+begin_src bash
+  kitty @ set-colors --all --configured ~/.config/kitty/colors/gruvbox.light.conf
+#+end_src
+   
+Voilà! =--all= changes all windows as the name implies, dropping
+this flag makes the command only target the current window.
+=--configured= makes the configuration sticky, and will affect all
+new windows in **this instance**.
+   
+You can take this to the next level and create an interactive
+CLI script to choose your color scheme. My next post will be on how to
+create interactive CLI tools using just FZF!
+   
+#+begin_src bash
+  header="press <enter> to enable colorscheme, <C-c> to exit." 
+  bindings='enter:execute-silent(kitty @ set-colors {})' 
+  preview='bat {}'
+  find ~/.config/kitty/colors/ -name '*.conf' 
+  fzf --header "$header" --bind "$bindigs" --preview "$preview"
+#+end_src
+   
+Here it is in action.
+   
+#+begin_export html
+<video controls src="/video/1fe86b9a71474352-kitty-fzf-colorscheme-change.webm">
+</video>
+#+end_export
+
+If you use fish shell you can copy the function below to have a color
+scheme toggle with auto completion
+   
+#+begin_src fish
+     # ~/.config/fish/functions/kitty-colorscheme.fish   
+     function kitty-colorscheme -a colorscheme
+       kitty @ set-colors --all --configured ~/.config/kitty/colors/$colorscheme.conf
+     end 
+     
+     set -l colorschemes (fd 'conf' ~/.config/kitty/colors | rg $HOME'/.config/kitty/colors/(.*)\.conf' --replace '$1')
+     
+     complete -c kitty-colorscheme --no-files --require-parameter --arguments "$colorschemes" 
+#+end_src
+   
+   
+** DONE Batch export Org-mode pages                      :emacs:orgmode:hugo:
+CLOSED: [2020-06-27 Sat 18:03]
+:PROPERTIES:
+:CREATED:  <2020-06-27 Sat 16:58>
+:export_file_name: batch-export-org-mode-pages
+:END:
+   
+A common task if - like me - you use /Org-mode/ to create static
+websites; is to export the document to your destination format.
+Take this blog for instance. It's written in /Org-mode/, which is
+exported to /markdown/ for use by /Hugo/ which will then compile it
+to /HTML/. The obvious choice for exporting your content would be
+to call the command directly within Emacs, but say you wanted to do
+this as a part of some other build process or as part of an
+automated continuous deployment process it would be necessary to
+invoke the export command from the shell.
+
+Fortunately, Emacs provides the ability to use it in a non-interactive
+manner via the =--batch= flag.
+
+#+begin_example
+  --batch                     do not do interactive display; implies -q
+  --no-init-file, -q          load neither ~/.emacs nor default.el
+#+end_example
+
+Running Emacs in batch mode we just need to open our /Org-mode/
+document, either programmatically or with the =--visit FILE= flag, load
+whatever /Org-mode exporter/ library, and call its export function. I'm
+using /ox-Hugo/ so that's what'll I'll require. It's also necessary to
+ensure the Emacs can load this library; the easiest way I
+know how to do this is to call =(package-initialize)=, which loads /all/
+packages so I don't need to adjust load paths or load individual
+packages.
+
+The solution to my particular situation where I'm exporting the
+entire document to markdown intended for Hugo as part of a build
+process on my machine looks like this:
+
+#+begin_src shell
+  #!/bin/sh
+  
+  index=./content-org/index.org
+  
+  progn="(progn
+    (package-initialize)
+    (require 'ox-hugo)
+    (org-hugo-export-wim-to-md :all-subtrees nil nil))"
+  
+  emacs --batch --visit "$index" --eval "$progn" --kill
+#+end_src
+
+The =--eval= flag is used to run by export commands, but you
+could  have just as easily put these command in their own /dot el/ file
+and load that - or put each /sexp/ as it's own argument to
+=--eval=.
+
+Note that this isn't tested for a continuous deployment environment
+and you'd likely have to adjust a few things to ensure that
+packages are available and whatnot.
+
+Only three posts in and I've already managed to make a meta post
+about how this blog is created.
+   
+   
+** DONE Capture the output of a Vim command                             :vim:
+CLOSED: [2020-06-24 Wed 22:54]
+:PROPERTIES:
+:CREATED:  <2020-06-24 Wed 22:54>
+:export_file_name: capture-the-output-of-vim-command
+:END:
+Vim ships with an internal pager named "more" for displaying
+command output that is used when the entire screen would be filled.
+Despite it's name, /more/, it is *not* the command line utility
+that you might be familiar with, and because it's a builtin feature vim cannot be configured
+to use an alternative (like /less/).
+
+Much like it's namesake, the internal /more/ pager leaves a lot to
+be desired, like any ability to search the output. Fortunately, you can
+capture the output of any vim expression and display however you want.
+   
+Vim provides three means of capturing /messages/: =:redir=,
+=execute()= and =:set verbosefile=. We will be focusing on
+=execute()= for our purposes. =:redir= can be useful if you just
+want to quickly redirect output to a variable, file, register, or
+some other source but you generally will rely on =execute()= while
+scripting.
+   
+General usage is =execute({expr})=, or =execute([{expr}, {expr}])=
+for multiple commands. Notice below how the entire output is
+concatenated into a single string.
+   
+#+begin_src vimrc
+  :execute('echon "foo"')
+  'foo'
+  :execute(['echon "foo"', 'echon "bar"'])
+  'foobar'
+#+end_src
+   
+Now that we have the output as a string we can write a
+function that creates a temporary buffer with the output and opens
+a window in the bottom of the current tabpage.
+   
+#+begin_src vimrc
+  function! s:split(expr) abort
+  let lines = split(execute(a:expr, 'silent'), "[\n\r]")
+  let name = printf('capture://%s', a:expr)
+  
+  if bufexists(name) == v:true
+  execute 'bwipeout' bufnr(name)
+  endif
+  
+  execute 'botright' 'new' name
+  
+  setlocal buftype=nofile
+  setlocal bufhidden=hide
+  setlocal noswapfile
+  setlocal filetype=vim
+  
+  call append(line('$'), lines)
+  endfunction
+#+end_src
+   
+Which when called will produce the output below (command =:P= is
+defined later). The  show capturing the output of
+=:command= to get a listing of all user defined commands.
+   
+#+DOWNLOADED: screenshot @ 2020-06-25 01:20:12
+[[file:images/Posts/2020-06-25_01-20-12_screenshot.png]]
+ 
+   
+Or, if you use fzf-vim and you want to search the output you could use it like the below function.
+   
+#+begin_src vimrc
+  function! s:fzf(expr) abort
+  let lines = split(execute(a:expr, 'silent'), "[\n\r]")
+  
+  return fzf#run({
+  \  'source': lines,
+  \  'options': '--tiebreak begin --ansi --header-lines 1'
+  \})
+  endfunction
+#+end_src
+   
+And as a example usage we could execute =:P! function= to search for all projectionist.vim functions.
+
+#+DOWNLOADED: screenshot @ 2020-06-25 01:23:19
+[[file:images/Posts/2020-06-25_01-23-19_screenshot.png]]
+   
+Now we can tie it all together with a /command/ that we easily use
+from command mode, and function that will let us choose dumping to a
+buffer or searching with fzf on demand.
+   
+#+begin_src vimrc
+  function s:capture(expr, bang) abort
+  if a:bang
+  call s:fzf(a:expr)
+  else
+  call s:split(a:expr)
+  endif
+  endfunction
+  
+  command! -nargs=1 -bang -complete=command P call s:capture(<q-args>, <bang>0)
+#+end_src
+
+   
+Below is the script in its entirety:
+
+#+begin_src vimrc
+  function! s:split(expr) abort
+  let lines = split(execute(a:expr, 'silent'), "[\n\r]")
+  let name = printf('capture://%s', a:expr)
+  
+  if bufexists(name) == v:true
+  execute 'bwipeout' bufnr(name)
+  end
+  
+  execute 'botright' 'new' name
+  
+  setlocal buftype=nofile
+  setlocal bufhidden=hide
+  setlocal noswapfile
+  setlocal filetype=vim
+  
+  call append(line('$'), lines)
+  endfunction
+  
+  function! s:fzf(expr) abort
+  let lines = split(execute(a:expr, 'silent'), "[\n\r]")
+  
+  return fzf#run({
+  \  'source': lines,
+  \  'options': '--tiebreak begin --ansi --header-lines 1'
+  \})
+  endfunction
+  
+  function s:capture(expr, bang) abort
+  if a:bang
+  call s:fzf(a:expr)
+  else
+  call s:split(a:expr)
+  endif
+  endfunction
+  
+  command! -nargs=1 -bang -complete=command P call s:capture(<q-args>, <bang>0)
+#+end_src
+
+** DONE Create a Vim quickfix list from the clipboard                   :vim:
+CLOSED: [2020-05-07 Thu 14:34]
+:PROPERTIES:
+:export_file_name: vim-quickfix-clipboard
+:CREATED:  <2020-05-07 Thu 14:34>
+:END:
+
+Do you find yourself editing a buffer containing file paths and you
+want to quickly switch between them?
+
+The =:cex[pr][!} {expr}= command executes any valid vim expression
+(={expr}=) and constructs a quickfix list from each string of the output.
+   
+Assuming you've =set clipboard= to =unnamed= or =unamedplus=, you
+can supply the clipboard register (=@*=, or =@+= respectively) as a
+vim expression.
+   
+#+begin_src vim -n 1
+  "assuming :set clipboard=unnamed
+  :cex @* 
+#+end_src
+   
+or:
+   
+#+begin_src vim
+  "assuming :set clipboard=unnamedplus
+  :cex @+ 
+#+end_src
+   
+Now you can set the quickfix to the current contents of your
+clipboard, note that your input will still have to match your [[https://neovim.io/doc/user/options.html#'errorformat'][errorformat]].
+   
+@@html:<div class="block"><script id="asciicast-SHFPgdNJTVOH9j8RkSyQpQ2uz" src="https://asciinema.org/a/SHFPgdNJTVOH9j8RkSyQpQ2uz.js" async></script></div>@@
+   
 ** TODO Importing lua rocks dependencies from vim :vim:lua:
 :PROPERTIES:
 :CREATED:  <2020-06-03 Wed 10:23>
@@ -676,377 +1046,7 @@ fix export maps
 
 
 
-** DONE Jest code coverage in Neovim           :vim:javascript:jest:testing:
-CLOSED: <2022-06-28 Tue>
-:PROPERTIES:
-:export_file_name: jest-code-coverage-neovim
-:END:
 
-I've been wanting to be able to view my code coverage directly within Vim for a long time.
-Not having to switch to browser or another window shortens the feedback loop, especially when developing a test for code you aren't familiar with.
-Wallaby.js is a VSCode extension that handles this really well:
-it lets you run tests directly in the buffer and annotates lines with a green or red square to indicate if then statement was covered.
-
-Well, as of today I'm happy to announce that you can have this in (Neo)vim as well!
-
-You can download it here: https://github.com/Dkendal/nvim-coverage
-   
-#+DOWNLOADED: screenshot @ 2022-06-28 10:23:52
-#+CAPTION: Green highlight in the sign column is a covered statement, count is how many times it was covered. Red sign column is an uncovered statement. Black and yellow is an =if= path not taken. Yellow is an uncovered branch.
-[[file:images/Posts/2022-06-28_10-23-52_screenshot.png]]
-   
-
-** DONE Create a Vim quickfix list from the clipboard                   :vim:
-CLOSED: [2020-05-07 Thu 14:34]
-:PROPERTIES:
-:export_file_name: vim-quickfix-clipboard
-:CREATED:  <2020-05-07 Thu 14:34>
-:END:
-
-Do you find yourself editing a buffer containing file paths and you
-want to quickly switch between them?
-
-The =:cex[pr][!} {expr}= command executes any valid vim expression
-(={expr}=) and constructs a quickfix list from each string of the output.
-   
-Assuming you've =set clipboard= to =unnamed= or =unamedplus=, you
-can supply the clipboard register (=@*=, or =@+= respectively) as a
-vim expression.
-   
-#+begin_src vim -n 1
-  "assuming :set clipboard=unnamed
-  :cex @* 
-#+end_src
-   
-or:
-   
-#+begin_src vim
-  "assuming :set clipboard=unnamedplus
-  :cex @+ 
-#+end_src
-   
-Now you can set the quickfix to the current contents of your
-clipboard, note that your input will still have to match your [[https://neovim.io/doc/user/options.html#'errorformat'][errorformat]].
-   
-@@html:<div class="block"><script id="asciicast-SHFPgdNJTVOH9j8RkSyQpQ2uz" src="https://asciinema.org/a/SHFPgdNJTVOH9j8RkSyQpQ2uz.js" async></script></div>@@
-   
-** DONE Capture the output of a Vim command                             :vim:
-CLOSED: [2020-06-24 Wed 22:54]
-:PROPERTIES:
-:CREATED:  <2020-06-24 Wed 22:54>
-:export_file_name: capture-the-output-of-vim-command
-:END:
-Vim ships with an internal pager named "more" for displaying
-command output that is used when the entire screen would be filled.
-Despite it's name, /more/, it is *not* the command line utility
-that you might be familiar with, and because it's a builtin feature vim cannot be configured
-to use an alternative (like /less/).
-
-Much like it's namesake, the internal /more/ pager leaves a lot to
-be desired, like any ability to search the output. Fortunately, you can
-capture the output of any vim expression and display however you want.
-   
-Vim provides three means of capturing /messages/: =:redir=,
-=execute()= and =:set verbosefile=. We will be focusing on
-=execute()= for our purposes. =:redir= can be useful if you just
-want to quickly redirect output to a variable, file, register, or
-some other source but you generally will rely on =execute()= while
-scripting.
-   
-General usage is =execute({expr})=, or =execute([{expr}, {expr}])=
-for multiple commands. Notice below how the entire output is
-concatenated into a single string.
-   
-#+begin_src vimrc
-  :execute('echon "foo"')
-  'foo'
-  :execute(['echon "foo"', 'echon "bar"'])
-  'foobar'
-#+end_src
-   
-Now that we have the output as a string we can write a
-function that creates a temporary buffer with the output and opens
-a window in the bottom of the current tabpage.
-   
-#+begin_src vimrc
-  function! s:split(expr) abort
-  let lines = split(execute(a:expr, 'silent'), "[\n\r]")
-  let name = printf('capture://%s', a:expr)
-  
-  if bufexists(name) == v:true
-  execute 'bwipeout' bufnr(name)
-  endif
-  
-  execute 'botright' 'new' name
-  
-  setlocal buftype=nofile
-  setlocal bufhidden=hide
-  setlocal noswapfile
-  setlocal filetype=vim
-  
-  call append(line('$'), lines)
-  endfunction
-#+end_src
-   
-Which when called will produce the output below (command =:P= is
-defined later). The  show capturing the output of
-=:command= to get a listing of all user defined commands.
-   
-#+DOWNLOADED: screenshot @ 2020-06-25 01:20:12
-[[file:images/Posts/2020-06-25_01-20-12_screenshot.png]]
- 
-   
-Or, if you use fzf-vim and you want to search the output you could use it like the below function.
-   
-#+begin_src vimrc
-  function! s:fzf(expr) abort
-  let lines = split(execute(a:expr, 'silent'), "[\n\r]")
-  
-  return fzf#run({
-  \  'source': lines,
-  \  'options': '--tiebreak begin --ansi --header-lines 1'
-  \})
-  endfunction
-#+end_src
-   
-And as a example usage we could execute =:P! function= to search for all projectionist.vim functions.
-
-#+DOWNLOADED: screenshot @ 2020-06-25 01:23:19
-[[file:images/Posts/2020-06-25_01-23-19_screenshot.png]]
-   
-Now we can tie it all together with a /command/ that we easily use
-from command mode, and function that will let us choose dumping to a
-buffer or searching with fzf on demand.
-   
-#+begin_src vimrc
-  function s:capture(expr, bang) abort
-  if a:bang
-  call s:fzf(a:expr)
-  else
-  call s:split(a:expr)
-  endif
-  endfunction
-  
-  command! -nargs=1 -bang -complete=command P call s:capture(<q-args>, <bang>0)
-#+end_src
-
-   
-Below is the script in its entirety:
-
-#+begin_src vimrc
-  function! s:split(expr) abort
-  let lines = split(execute(a:expr, 'silent'), "[\n\r]")
-  let name = printf('capture://%s', a:expr)
-  
-  if bufexists(name) == v:true
-  execute 'bwipeout' bufnr(name)
-  end
-  
-  execute 'botright' 'new' name
-  
-  setlocal buftype=nofile
-  setlocal bufhidden=hide
-  setlocal noswapfile
-  setlocal filetype=vim
-  
-  call append(line('$'), lines)
-  endfunction
-  
-  function! s:fzf(expr) abort
-  let lines = split(execute(a:expr, 'silent'), "[\n\r]")
-  
-  return fzf#run({
-  \  'source': lines,
-  \  'options': '--tiebreak begin --ansi --header-lines 1'
-  \})
-  endfunction
-  
-  function s:capture(expr, bang) abort
-  if a:bang
-  call s:fzf(a:expr)
-  else
-  call s:split(a:expr)
-  endif
-  endfunction
-  
-  command! -nargs=1 -bang -complete=command P call s:capture(<q-args>, <bang>0)
-#+end_src
-
-** DONE Batch export Org-mode pages                      :emacs:orgmode:hugo:
-CLOSED: [2020-06-27 Sat 18:03]
-:PROPERTIES:
-:CREATED:  <2020-06-27 Sat 16:58>
-:export_file_name: batch-export-org-mode-pages
-:END:
-   
-A common task if - like me - you use /Org-mode/ to create static
-websites; is to export the document to your destination format.
-Take this blog for instance. It's written in /Org-mode/, which is
-exported to /markdown/ for use by /Hugo/ which will then compile it
-to /HTML/. The obvious choice for exporting your content would be
-to call the command directly within Emacs, but say you wanted to do
-this as a part of some other build process or as part of an
-automated continuous deployment process it would be necessary to
-invoke the export command from the shell.
-
-Fortunately, Emacs provides the ability to use it in a non-interactive
-manner via the =--batch= flag.
-
-#+begin_example
-  --batch                     do not do interactive display; implies -q
-  --no-init-file, -q          load neither ~/.emacs nor default.el
-#+end_example
-
-Running Emacs in batch mode we just need to open our /Org-mode/
-document, either programmatically or with the =--visit FILE= flag, load
-whatever /Org-mode exporter/ library, and call its export function. I'm
-using /ox-Hugo/ so that's what'll I'll require. It's also necessary to
-ensure the Emacs can load this library; the easiest way I
-know how to do this is to call =(package-initialize)=, which loads /all/
-packages so I don't need to adjust load paths or load individual
-packages.
-
-The solution to my particular situation where I'm exporting the
-entire document to markdown intended for Hugo as part of a build
-process on my machine looks like this:
-
-#+begin_src shell
-  #!/bin/sh
-  
-  index=./content-org/index.org
-  
-  progn="(progn
-    (package-initialize)
-    (require 'ox-hugo)
-    (org-hugo-export-wim-to-md :all-subtrees nil nil))"
-  
-  emacs --batch --visit "$index" --eval "$progn" --kill
-#+end_src
-
-The =--eval= flag is used to run by export commands, but you
-could  have just as easily put these command in their own /dot el/ file
-and load that - or put each /sexp/ as it's own argument to
-=--eval=.
-
-Note that this isn't tested for a continuous deployment environment
-and you'd likely have to adjust a few things to ensure that
-packages are available and whatnot.
-
-Only three posts in and I've already managed to make a meta post
-about how this blog is created.
-   
-   
-** DONE Change Kitty terminal color-scheme                   :fzf:kitty:fish:
-CLOSED: [2021-01-20 Wed 23:05]
-:PROPERTIES:
-:CREATED:  <2021-01-20 Wed 22:28>
-:export_file_name: change-kitty-shell-color-scheme
-:END:
-   
-One of the more [[https://github.com/kovidgoyal/kitty/issues?q=is%3Aissue+reload+config][persistant complaints]] about the Kitty terminal emulator is the
-inability to reload configuration. While you can't change every
-option at runtime, you can change most display properties on fly if
-you enable [[https://sw.kovidgoyal.net/kitty/remote-control.html?highlight=remote%20control][remote control]] first. After this small tweak you can
-change color schemes, window padding, and font sizes on demand in
-a single, or all windows; current, and future.
-   
-#+begin_example
-  ❯ kitty @ --help
-  Usage: kitty @ [options] command ...
-
-  Control kitty by sending it commands. Set the allow_remote_control option to
-  yes in kitty.conf for this to work.
-#+end_example
-
-After enabling =allow_remote_control=, we can make use of any of
-the [[https://sw.kovidgoyal.net/kitty/remote-control.html#kitty-set-colors][kitty @ set-<cmd> ...]] commands.
-   
-This is what my kitty directory looks like. Normally I use a dark
-mode theme (gruvbox.dark.conf), but as my eyes get tired I'll
-switch over to my light theme (gruvbox.light.conf).
-   
-#+begin_example
-  ~/.config/kitty
-  ❯ exa -T
-  .
-  ├── colors
-  │  ├── gruvbox.dark.conf
-  │  ├── gruvbox.light.conf
-  │  └── snazzy.conf
-  ├── diff.conf
-  └── kitty.conf
-#+end_example
-
-#+begin_src bash
-  kitty @ set-colors --all --configured ~/.config/kitty/colors/gruvbox.light.conf
-#+end_src
-   
-Voilà! =--all= changes all windows as the name implies, dropping
-this flag makes the command only target the current window.
-=--configured= makes the configuration sticky, and will affect all
-new windows in **this instance**.
-   
-You can take this to the next level and create an interactive
-CLI script to choose your color scheme. My next post will be on how to
-create interactive CLI tools using just FZF!
-   
-#+begin_src bash
-  header="press <enter> to enable colorscheme, <C-c> to exit." 
-  bindings='enter:execute-silent(kitty @ set-colors {})' 
-  preview='bat {}'
-  find ~/.config/kitty/colors/ -name '*.conf' 
-  fzf --header "$header" --bind "$bindigs" --preview "$preview"
-#+end_src
-   
-Here it is in action.
-   
-#+begin_export html
-<video controls src="/video/1fe86b9a71474352-kitty-fzf-colorscheme-change.webm">
-</video>
-#+end_export
-
-If you use fish shell you can copy the function below to have a color
-scheme toggle with auto completion
-   
-#+begin_src fish
-     # ~/.config/fish/functions/kitty-colorscheme.fish   
-     function kitty-colorscheme -a colorscheme
-       kitty @ set-colors --all --configured ~/.config/kitty/colors/$colorscheme.conf
-     end 
-     
-     set -l colorschemes (fd 'conf' ~/.config/kitty/colors | rg $HOME'/.config/kitty/colors/(.*)\.conf' --replace '$1')
-     
-     complete -c kitty-colorscheme --no-files --require-parameter --arguments "$colorschemes" 
-#+end_src
-   
-   
-** DONE How to install Neovim nightly                                   :vim:
-CLOSED: [2021-01-24 Sun 13:02]
-:PROPERTIES:
-:CREATED:  <2021-01-24 Sun 12:56>
-:export_file_name: how-to-install-neovim-nightly
-:END:
-   
-Here's a quick little script that you can use build and install the
-most recent release of Neovim.
-
-#+begin_src bash
-  #!/bin/bash
-  cd ~ || exit 1
-  sudo rm -r neovim || true
-  git clone https://github.com/neovim/neovim
-  cd neovim || exit 1
-  sudo make CMAKE_BUILD_TYPE=Release install
-  cd ~ || exit 1
-  sudo rm -r neovim
-#+end_src
-   
-I've used this on both Linux and Mac OSX without issue. This script
-was originally posted on a Neovim GitHub issue tracker which I've
-long since forgotten.
-   
-More options for the make install task [[https://github.com/neovim/neovim/wiki/Installing-Neovim][here]].
-   
    
 * TODO Styleguide 
 :PROPERTIES:
