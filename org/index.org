@@ -33,6 +33,136 @@
 :PROPERTIES:
 :CREATED:  <2020-05-07 Thu 10:54>
 :END:
+** DONE Capture paths from a Kitty window in Neovim       :vim:lua:plugin:
+CLOSED: [2022-07-03 Sun]
+:PROPERTIES:
+:export_file_name: capture-paths-kitty-neovim
+:END:
+
+Tired of skimming through buffer output, looking for a path?
+I am!
+I spent relaxing day at the cottage hacking together a Lua plugin to do this automatically.
+
+The script uses [[https://sw.kovidgoyal.net/kitty/remote-control/#kitty-ls][kitty's remote control]] feature to grab text from all other windows in the current tab.
+To make things simple the script only cares about visible portion of the scrollback buffer, although you could certainly tweak the options to grab the whole buffer.
+Likewise, the Vim buffer is updated when it regains focus but it could be improved to act on a timer to respond to updates.
+
+#+caption: The red arrow on the left indicates the path visible in the buffer, the red arrow on the right indicates the virtual text that was added by the lua script to indicate the referenced file path.
+#+ATTR_ORG: :width 800
+[[file:images/Posts/2022-07-03_15-30-08_screenshot.png]]
+ 
+
+If you're not familiar with writing lua plugins for Neovim this sample has a pretty decent sampling of common operations: creating an auto command, adding highlighted virtual text using extmarks, and working with data from external commands.
+
+The full source is provided below, to make use of it either plop it in a new file and =require(...)= from your init.lua or put it in a file under =~/.config/nvim/plugin/= to have it autoload.
+
+#+begin_src lua
+  -- @alias Process { pid: number }
+  ---@alias KittyWindow { id: number, is_focused: boolean, is_self: boolean, foreground_processes: Process }
+  ---@alias KittyTab { id: number, is_focused: boolean, windows: KittyWindow[] }
+  ---@alias KittyWM { id: number, is_focused: boolean, tabs: KittyTab[] }
+  ---@alias KittyState KittyWM[]
+  
+  local config = {}
+  
+  local pid = vim.fn.getpid()
+  local ns = vim.api.nvim_create_namespace("user-kitty")
+  
+  local group = vim.api.nvim_create_augroup("user-kitty", { clear = true })
+  
+  local function has_support()
+    return vim.fn.executable("kitty") and vim.fn.system("kitty @ ls > /dev/null && printf 'ok'") == "ok"
+  end
+  
+  ---@param window KittyWindow
+  local function kitty_is_current_window(window)
+    for _, ps in ipairs(window.foreground_processes) do
+      if ps.pid == pid then
+        return true
+      end
+    end
+    return false
+  end
+  
+  ---@param state KittyState
+  ---@return KittyTab
+  local function kitty_get_current_tab(state)
+    for _, wm in ipairs(state) do
+      for _, tab in ipairs(wm.tabs) do
+        for _, window in ipairs(tab.windows) do
+          if kitty_is_current_window(window) then
+            return tab
+          end
+        end
+      end
+    end
+  end
+  
+  ---@return KittyState
+  local function kitty_get_state()
+    local txt = vim.fn.system("kitty @ ls")
+  
+    if txt == nil then
+      return
+    end
+    return vim.fn.json_decode(txt)
+  end
+  
+  ---@param id number
+  ---@param opts {}
+  ---@return string[]
+  local function kitty_get_text(id, opts)
+    return vim.fn.systemlist("kitty @ get-text --match id:" .. id)
+  end
+  
+  local function callback()
+    vim.api.nvim_buf_clear_namespace(0, ns, 0, -1)
+  
+    local state = kitty_get_state()
+    local tab = kitty_get_current_tab(state)
+  
+    for _, window in ipairs(tab.windows) do
+      if not kitty_is_current_window(window) then
+        local lines = kitty_get_text(window.id, {})
+  
+        for _, line in ipairs(lines) do
+          local pattern = "(%S+%.%S+):(%d+):(%d+):"
+          local path, lnum, col = string.match(line, pattern)
+  
+          if path then
+            local bufnr = vim.fn.bufnr(path)
+  
+            if bufnr then
+              vim.api.nvim_buf_set_extmark(bufnr, ns, tonumber(lnum) - 1, tonumber(col) - 1, {
+                hl_group = "Search",
+                virt_text = { { "🐱", "Search" } },
+                virt_text_pos = "eol",
+                strict = false,
+              })
+            end
+          end
+        end
+      end
+    end
+  end
+  
+  local function init()
+    if not has_support() then
+      vim.notify("Kitty remote control is not enabled or supported, hint: check the output of `kitty @ ls`")
+      return
+    end
+  
+    vim.api.nvim_create_autocmd({ "BufEnter" }, {
+      -- Tweak the pattern to enable whatever filetypes you want to support
+      pattern = { "*.hs" },
+      group = group,
+      callback = callback,
+    })
+  end
+  
+  init()
+#+end_src
+
 ** DONE Jest code coverage in Neovim           :vim:javascript:jest:testing:
 CLOSED: [2022-06-28 Tue]
 :PROPERTIES:
@@ -1047,7 +1177,6 @@ fix export maps
 
 
 
-   
 * TODO Styleguide 
 :PROPERTIES:
 :CREATED:  <2020-06-18 Thu 13:10>
