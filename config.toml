@@ -5,7 +5,7 @@ theme = 'archie'
 paginate = 10
 # enableGitInfo = true
 staticDir = "static"
-googleAnalytics = 'UA-57617209-1'
+googleAnalytics = 'G-QRNY1HKHWT'
 
 ignoreErrors = ["error-missing-instagram-accesstoken"]
 
