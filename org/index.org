@@ -33,6 +33,210 @@
 :PROPERTIES:
 :CREATED:  <2020-05-07 Thu 10:54>
 :END:
+** DONE Tap Capslock for Escape, Hold for Control :linux:keyboard:
+:PROPERTIES:
+:export_file_name: capslock-tap-escape-hold-control
+:END:
+
+About a month ago I picked up a Dygma raise[fn:2]: a split, ergonomic keyboard with programable firmware.
+At some point I'd like to write more about my foray into mechanical, and more specifically split board keebs but for now the most important part is that the Raise has a programmable firmware.
+Beyond simple rebinds it also allows for dual function keys, layers, and QMK tap dance[fn:3] like contextually sensitive bindings.
+
+#+ATTR_ORG: :width 200
+#+caption: Mmmm... thumb clusters.
+[[file:images/Posts/2022-07-22_12-04-59_screenshot.png]]
+
+
+This is Great!
+Love it!
+But every time I'm without my keyboard, and have to work on my laptop's built-in keyboard I'm actively fighting against muscle memory.
+
+*** The Past
+As a brief detour, I've always had at least a few key rebindings.
+
+If a penchant for legend-free key caps and track balls wasn't enough to deter others from using my computer, keys not doing what you expect should be cherry on top.
+
+Due to my now complete reliance on Vi bindings and (Neo)vim in general I mash the escape button a lot.
+To make this more ergonomic and easier for my for my poor, strained, little pinky finger, I've always bound caps-lock to escape.
+
+For the last several years I used a Leopold FC660M.
+Aside from the lovely tucked in arrow pad on the right corner, it provides a hardware toggle to swap caps-lock with escape.
+
+
+#+CAPTION: I loved the keyboard some much I had two! In addition to the hardware toggle for swapping escape and caps-lock, you can change escape to grave-tilde, which I also did.
+#+ATTR_ORG: :width 200
+[[file:images/Posts/2022-07-22_11-23-12_screenshot.png]]
+
+
+With the external keyboard situation, much like today, I had the same issue of how to make my laptop keyboard equitable.
+A common way[fn:1] to accomplish this on this Linux, and other simple key re-bindings, is to use =xmodmap= or =setxbmap=[fn:4].
+If you're on Gnome you can also just use =gsettings= or just change the keyboard options in gnome tweaks for simple things like swapping modifier keys.
+As mentioned, only good for simple modifier key swaps, and as the name of the executables would imply, only good for XOrg.
+
+*** Enlightenment
+
+After being exposed to QMK tap dance via the Ergodox EZ[fn:5], and the enhanced ergonomics and reduced pinky strain of making the once useless caps-lock a multi function powerhouse, using my laptop keyboard had become more and more frustrating.
+
+Both MacOSX, and Windows have decent solutions to arbitrary key rebindings in the form of Karabiner[fn:6], and Autohotkey[fn:7] respectively.
+One would expect Linux, in all it's customizability and especially being open-source would surely have some similar options but either they didn't previously exist or I've been ignorant to them [fn:8].
+
+By chance I came across KMonad[fn:9]. The project homepage made promises of being able to do all the things that I wanted, arbitrary key remapping, tap-dance like multi keys, layers.
+Even better is that I could make these configurations keyboard specific - very import for me as I wanted these to only apply to my ThinkPad's builtin keyboard[fn:10]
+
+Surprisingly enough, it delivers on these promises!
+
+*** KMonad
+
+It's been a while so let's summarize what I'm actually trying to accomplish:
+- Bind *tap* =CAPSLOCK= to =ESC=, as previously done in gnome settings / xmodmap.
+- Bind *hold* =CAPSLOCK= to =CTRL=.
+- Bonus: Bind *hold* =ENTER= to =CTRL=, so that the keyboard is symmetrical and both pinkies can benefit and prosper.
+
+I won't rehash the KMonad getting started docs, which you can find [[https://github.com/kmonad/kmonad/blob/master/doc/quick-reference.md][here]].
+
+After the initial install, I created my dot-kbd config file by copying one of the [[https://github.com/kmonad/kmonad/tree/master/keymap/template][template kbd files]].
+KMonad doesn't automatically source your config file (more on that later) so I'm going to have it live near all my other XDG configs in *~/.config/kmonad/config.kbd*.
+
+As previously mentioned, this config is going to be keyboard specific.
+For Linux specifically this means identifying the */dev/* file that maps to the targeted keyboard.
+I'd suggest using =evtest= to test and identify your keyboard.
+**Hint:** Your built-in keyboard is probably something like =/dev/input/by-path/*-event-kbd=, so you can also just run =find= and pick it out that way.
+
+Having found our keyboard we can finally proceed. Taking this information we specify that this config maps to this input device and produces a virtual keyboard named "KMonad KBD".
+#+begin_src lisp -n 1
+  (defcfg
+    input (device-file "/dev/input/by-path/platform-i8042-serio-0-event-kbd")
+    output (uinput-sink "KMonad KBD"))
+#+end_src
+
+Next up: we define what the keyboard's physical layout looks like.
+All of our subsequent layers will use this as a reference so that we can rebind keys in the same physical location. This is what it looks like for my 2021 ThinkPad X1.
+
+#+begin_src lisp +n 1
+  (defsrc
+      esc  f1 f2 f3 f4    f5 f6 f7 f8    f9 f10 f11 f12      home end ins del
+      grv  1    2    3    4    5    6    7    8    9    0    -    =    bspc
+      tab  q    w    e    r    t    y    u    i    o    p    [    ]    \
+      caps a    s    d    f    g    h    j    k    l    ;    '    ret
+      lsft z    x    c    v    b    n    m    ,    .    /         rsft
+      lctl lmet lalt           spc            ralt sys  rctl pgup up   pgdn
+                                                               left down right
+    )
+#+end_src
+
+
+#+attr_org: :width 300
+#+caption: The resemblance is uncanny.
+[[file:images/Posts/2022-07-22_12-37-34_screenshot.png]]
+ 
+  
+With the boilerplate layout in place, we can define what we want our multi function keys to do.
+We could write this in inline in the layout, but for the sake of legibility we use the kmonad =defalias= function to define a new virtual key that we can bind to.
+
+#+begin_src lisp +1
+  (defalias esc (tap-next-release esc lctl))
+  (defalias ret (tap-next-release ret rctl))
+#+end_src
+
+I'll quote the [[https://github.com/kmonad/kmonad/blob/master/keymap/tutorial.kbd][kmonad docs]] to explain what the =tap-next-release= function does in more detail, but the short version is it the first argument is the key to bind on tap (=esc=), and the second is the key to bind on hold (=lctl=), with some special stuff to make it work more predictably on frequently pushed keys.
+
+#+begin_quote
+  The `tap-next-release` is like `tap-next`, except it decides whether to tap or
+  hold based on the next release of a key that was *not* pressed before us. This
+  also performs rollback like `tap-hold`. So, using the minilanguage and foo as:
+    (tap-next-release x lsft)
+  Then:
+    Tesc Ta         -> xa
+    Pa Pesc Ra Resc -> ax (because 'a' was already pressed when we started, so
+                           foo decides it is tapping)
+    Pesc Ta Resc    -> A (because a was pressed *and* released after we started,
+                          so foo decides it is holding)
+
+  These increasingly stranger buttons are, I think, coming from the stubborn
+  drive of some of my more eccentric (and I mean that in the most positive way)
+  users to make typing with modifiers on the home-row more comfortable.
+  Especially layouts that encourage a lot of rolling motions are nicer to use
+  with the `release` style buttons.
+#+end_quote
+
+All that's left to do is to bind these aliases to their desired physical keys:
+
+#+caption: Note the keys =@esc=, and =@ret=. Aliases are referenced with the =@= prefix.
+#+begin_src lisp +1
+  (deflayer base
+      esc  f1 f2 f3 f4    f5 f6 f7 f8    f9 f10 f11 f12      home end ins del
+      grv  1    2    3    4    5    6    7    8    9    0    -    =    bspc
+      tab  q    w    e    r    t    y    u    i    o    p    [    ]    \
+      @esc a    s    d    f    g    h    j    k    l    ;    '    @ret
+      lsft z    x    c    v    b    n    m    ,    .    /         rsft
+      lctl lmet lalt           spc            ralt sys  cmp    pgup up   pgdn
+                                                               left down right
+    )
+#+end_src
+
+Et, Voilà! All done.
+
+- [X] Bind *tap* =CAPSLOCK= to =ESC=
+- [X] Bind *hold* =CAPSLOCK= to =CTRL=
+- [X] Bind *hold* =ENTER= to =CTRL=
+
+*** Automatically applying the config on boot
+
+As previously hinted at, KMonad is a daemon that has no preference where you store your config(s).
+It's also up to you to start KMonad whenever you want the keyboard mappings to be applied.
+
+There's lots of way to auto start daemons.
+For me the easiest way - on Linux, in 2022 - is to create a Systemd user service.
+
+#+begin_src systemd -n 0
+# ~/.config/systemd/user/kmonad.service
+[Unit]
+Description=Kmonad service
+
+[Service]
+ExecStart=/home/dylan/.local/bin/kmonad /home/dylan/.config/kmonad/config.kbd
+StandardOutput=journal
+StandardError=journal
+Restart=always
+
+[Install]
+WantedBy=default.target
+#+end_src
+
+All you have to do now is enable the service:
+
+#+begin_src bash
+  systemctl --user enable kmonad.service
+#+end_src
+
+*** Footnotes
+
+[fn:10] I also have a [[https://www.keychron.com/products/keychron-k7-ultra-slim-wireless-mechanical-keyboard][Keychron K7]], which is a lovely, wireless, mechanical keyboard featuring low profile hot swapable optical switches.
+It's also pretty cheap, given the feature set, at $84 USD.
+I would say it's a near perfect travel keyboard if not for it's horrendous =INS= key placement, which is only accessible through =FN2+P= key chord, and =grave-tilde= is only accessible through =FN2+ESC=.
+I get that this sounds like a small gripe, but if it's not already clear that I'm an insufferable Linux+Vim user, I use =Shift+INS= a lot in the terminal to paste from the one of Linux's many clipboards.
+#+ATTR_ORG: :width 200
+[[file:images/Posts/2022-07-22_11-56-51_screenshot.png]]
+
+
+[fn:9] https://github.com/kmonad/kmonad 
+
+[fn:8] Note that I have used [[https://github.com/sezanzeb/input-remapper][input mapper]]. I found it okay for keys that I didn't press frequently, but found that there was a noticeable delay for anything I did a lot.
+
+[fn:7] https://www.autohotkey.com/
+
+[fn:6] https://karabiner-elements.pqrs.org/ 
+
+[fn:1] https://vim.fandom.com/wiki/Map_caps_lock_to_escape_in_Windows
+
+[fn:2] https://dygma.com/pages/raise
+
+[fn:3] https://thomasbaart.nl/2018/12/13/qmk-basics-tap-dance/
+
+[fn:4] https://superuser.com/questions/519994/how-to-swap-escape-and-caps-lock
+
+[fn:5] https://ergodox-ez.com/
+
 ** DONE Capture paths from a Kitty window in Neovim       :vim:lua:plugin:
 CLOSED: [2022-07-03 Sun]
 :PROPERTIES:
