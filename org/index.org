@@ -54,10 +54,11 @@ But every time I'm without my keyboard, and have to work on my laptop's built-in
 *** The Past
 As a brief detour, I've always had at least a few key rebindings.
 
-If a penchant for legend-free key caps and track balls wasn't enough to deter others from using my computer, keys not doing what you expect should be cherry on top.
+If a penchant for legend-free key caps and track balls wasn't enough to deter others from using my computer, keys not doing what you expect should be the cherry on top.
 
-Due to my now complete reliance on Vi bindings and (Neo)vim in general I mash the escape button a lot.
-To make this more ergonomic and easier for my for my poor, strained, little pinky finger, I've always bound caps-lock to escape.
+Due to my now complete reliance on Vi bindings - and (Neo)vim in general - I mash the escape button a lot.
+
+To make this more ergonomic for my poor, strained, little, pinky finger I've always bound caps-lock to escape.
 
 For the last several years I used a Leopold FC660M.
 Aside from the lovely tucked in arrow pad on the right corner, it provides a hardware toggle to swap caps-lock with escape.
@@ -68,19 +69,23 @@ Aside from the lovely tucked in arrow pad on the right corner, it provides a har
 [[file:images/Posts/2022-07-22_11-23-12_screenshot.png]]
 
 
-With the external keyboard situation, much like today, I had the same issue of how to make my laptop keyboard equitable.
-A common way[fn:1] to accomplish this on this Linux, and other simple key re-bindings, is to use =xmodmap= or =setxbmap=[fn:4].
-If you're on Gnome you can also just use =gsettings= or just change the keyboard options in gnome tweaks for simple things like swapping modifier keys.
+Much like today I had the same issue of how to make my laptop keyboard more equitable.
+A common way[fn:1] to accomplish this on this Linux, along with other simple key re-bindings, is to use =xmodmap= or =setxbmap=[fn:4].
+If you're on Gnome you can also just use the cli tool =gsettings=, which maps to the keyboard options in Gnome Tweaks[fn:11] for simple things like swapping modifier keys.
 As mentioned, only good for simple modifier key swaps, and as the name of the executables would imply, only good for XOrg.
 
 *** Enlightenment
 
-After being exposed to QMK tap dance via the Ergodox EZ[fn:5], and the enhanced ergonomics and reduced pinky strain of making the once useless caps-lock a multi function powerhouse, using my laptop keyboard had become more and more frustrating.
+Using my laptop keyboard had become more and more frustrating after being exposed to QMK tap dance via the Ergodox EZ[fn:5].
+In short tap dance lets you define what a key does when tapped, when held, double tapped, tapped then held, etc. etc.
+Adding tap dance bindings to a key that's in neutral position reduced my pinky strain and makes the once useless caps-lock a multi function powerhouse.
 
-Both MacOSX, and Windows have decent solutions to arbitrary key rebindings in the form of Karabiner[fn:6], and Autohotkey[fn:7] respectively.
-One would expect Linux, in all it's customizability and especially being open-source would surely have some similar options but either they didn't previously exist or I've been ignorant to them [fn:8].
+Both MacOSX, and Windows have decent solutions to arbitrary key rebindings in the form of Karabiner[fn:6], and Autohotkey[fn:7], respectively.
+One would expect Linux, in all it's customizability and open-sourceness would surely have some similar options.
+Either they didn't previously exist or I've been ignorant to them [fn:8].
 
-By chance I came across KMonad[fn:9]. The project homepage made promises of being able to do all the things that I wanted, arbitrary key remapping, tap-dance like multi keys, layers.
+By chance I came across KMonad[fn:9].
+The project homepage made promises of being able to do all the things that I wanted, arbitrary key remapping, tap-dance like multi keys, layers.
 Even better is that I could make these configurations keyboard specific - very import for me as I wanted these to only apply to my ThinkPad's builtin keyboard[fn:10]
 
 Surprisingly enough, it delivers on these promises!
@@ -210,6 +215,7 @@ All you have to do now is enable the service:
 #+end_src
 
 *** Footnotes
+[fn:11] Gnome tweaks is a GUI application that's part of the Gnome desktop manager https://wiki.gnome.org/Apps/Tweaks 
 
 [fn:10] I also have a [[https://www.keychron.com/products/keychron-k7-ultra-slim-wireless-mechanical-keyboard][Keychron K7]], which is a lovely, wireless, mechanical keyboard featuring low profile hot swapable optical switches.
 It's also pretty cheap, given the feature set, at $84 USD.
